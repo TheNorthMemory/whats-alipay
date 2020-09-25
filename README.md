@@ -53,7 +53,6 @@ whats
   .then(({headers,data}) => ({headers,data}))
   .catch(({response: {data}}) => data)
   .then(console.log)
-```
 
 {
   headers: {
@@ -88,6 +87,7 @@ whats
     trade_status: 'TRADE_SUCCESS'
   }
 }
+```
 
 #### 统一收单交易支付接口
 
