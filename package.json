@@ -1,0 +1,27 @@
+{
+  "name": "whats-alipay",
+  "version": "0.0.1",
+  "description": "Yet Another Alipay SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheNorthMemory/whats-alipay.git"
+  },
+  "keywords": [
+    "alipay",
+    "alipay-openapi",
+    "aes-cbc"
+  ],
+  "author": "James ZHANG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheNorthMemory/whats-alipay/issues"
+  },
+  "homepage": "https://github.com/TheNorthMemory/whats-alipay#readme",
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}
