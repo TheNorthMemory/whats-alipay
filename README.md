@@ -145,10 +145,14 @@ whats
 ```javascript
 const FormData = require('form-data')
 const payload = new FormData()
-payload.append('image_content', require('fs').readFileSync('/waiting/for/uploading.jpg'), 'uploading.jpg')
+payload.append('image_content', require('fs').readFileSync('/path/for/uploading.jpg'), 'uploading.jpg')
 
 whats
-  .ant.merchant.expand.indirect.image.upload(payload.getBuffer(), {image_type: 'jpg'}, {...payload.getHeaders()})
+  .ant.merchant.expand.indirect.image.upload(
+    payload.getBuffer(),
+    {image_type: 'jpg'},
+    {...payload.getHeaders()}
+  )
   .then(({data}) => data)
   .catch(({response: {data}}) => data)
   .then(console.log)
@@ -159,10 +163,14 @@ whats
 ```javascript
 const FormData = require('form-data')
 const payload = new FormData()
-payload.append('image_content', require('fs').readFileSync('/waiting/for/uploading.jpg'), 'uploading.jpg')
+payload.append('image_content', require('fs').readFileSync('/path/for/uploading.jpg'), 'uploading.jpg')
 
 whats
-  .alipay.offline.material.image.upload(payload.getBuffer(), {image_type: 'jpg', image_name: 'uploading.jpg'}, {...payload.getHeaders()})
+  .alipay.offline.material.image.upload(
+    payload.getBuffer(),
+    {image_type: 'jpg', image_name: 'uploading.jpg'},
+    {...payload.getHeaders()}
+  )
   .then(({data}) => data)
   .catch(({response: {data}}) => data)
   .then(console.log)
