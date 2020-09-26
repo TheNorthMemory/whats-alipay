@@ -140,6 +140,34 @@ whats
   .then(console.log)
 ```
 
+#### 支付API > 图片上传
+
+```javascript
+const FormData = require('form-data')
+const payload = new FormData()
+payload.append('image_content', require('fs').readFileSync('/waiting/for/uploading.jpg'), 'uploading.jpg')
+
+whats
+  .ant.merchant.expand.indirect.image.upload(payload.getBuffer(), {image_type: 'jpg'}, {...payload.getHeaders()})
+  .then(({data}) => data)
+  .catch(({response: {data}}) => data)
+  .then(console.log)
+```
+
+#### 店铺API > 上传门店照片和视频接口
+
+```javascript
+const FormData = require('form-data')
+const payload = new FormData()
+payload.append('image_content', require('fs').readFileSync('/waiting/for/uploading.jpg'), 'uploading.jpg')
+
+whats
+  .alipay.offline.material.image.upload(payload.getBuffer(), {image_type: 'jpg', image_name: 'uploading.jpg'}, {...payload.getHeaders()})
+  .then(({data}) => data)
+  .catch(({response: {data}}) => data)
+  .then(console.log)
+```
+
 #### 芝麻信用API > 授权查询
 
 ```javascript
@@ -178,6 +206,17 @@ whats
 console.info(whats)
 
 [Function (anonymous)] {
+  ant: [Function: ant] {
+    merchant: [Function: ant.merchant] {
+      expand: [Function: ant.merchant.expand] {
+        indirect: [Function: ant.merchant.expand.indirect] {
+          image: [Function: ant.merchant.expand.indirect.image] {
+            upload: [Function: ant.merchant.expand.indirect.image.upload]
+          }
+        }
+      }
+    }
+  },
   alipay: [Function: alipay] {
     trade: [Function: alipay.trade] {
       query: [Function: alipay.trade.query],
@@ -199,6 +238,13 @@ console.info(whats)
           enterinfo: [Function: alipay.eco.mycar.parking.enterinfo] {
             sync: [Function: alipay.eco.mycar.parking.enterinfo.sync]
           }
+        }
+      }
+    },
+    offline: [Function: alipay.offline] {
+      material: [Function: alipay.offline.material] {
+        image: [Function: alipay.offline.material.image] {
+          upload: [Function: alipay.offline.material.image.upload]
         }
       }
     }
@@ -294,7 +340,6 @@ console.info(Alipay)
 
 ## TODO
 
-- [ ] 图片上传
 - [ ] 返回的加密密文解密
 
 ## Changelog
