@@ -1,4 +1,6 @@
-# 支付宝 Alipay SDK
+# 支付宝 OpenAPI SDK
+
+Yet Another Alipay OpenAPI Smart Development Kit
 
 [![GitHub version](https://badgen.net/github/release/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay)
 [![GitHub issues](https://badgen.net/github/open-issues/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay)
