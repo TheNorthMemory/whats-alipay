@@ -1,10 +1,22 @@
 {
   "name": "whats-alipay",
   "version": "0.0.1",
-  "description": "Yet Another Alipay SDK",
+  "description": "Yet Another Alipay OpenAPI SDK",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
+  },
+  "engines": {
+    "node": ">=10.15.0"
+  },
+  "files": [
+    "index.js",
+    "lib/",
+    "README.md",
+    "LICENSE"
+  ],
+  "directories": {
+    "lib": "./lib"
   },
   "repository": {
     "type": "git",
@@ -13,6 +25,10 @@
   "keywords": [
     "alipay",
     "alipay-openapi",
+    "locale-date-time",
+    "json-like-parser",
+    "rsa-sha256",
+    "rsa-sha1",
     "aes-cbc"
   ],
   "author": "James ZHANG",
