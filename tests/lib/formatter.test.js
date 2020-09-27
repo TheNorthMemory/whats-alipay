@@ -1,6 +1,3 @@
-const {readFileSync} = require('fs')
-const {join} = require('path')
-
 const should = require('should')
 
 const Formatter = require('../../lib/formatter')
@@ -33,6 +30,7 @@ describe('lib/formatter', () => {
 
     it('method `queryStringLike({method: \'ali.pay\', format: \'JSON\', version: \'1.0\', biz_content: \'{}\', sign: 0})` should returns a string and equal to `method=ali.pay&format=JSON&version=1.0&biz_content={}`', () => {
       Formatter.queryStringLike({
+        /*eslint camelcase:0*/
         method: 'ali.pay', format: 'JSON', version: '1.0', biz_content: '{}', sign: 0
       }).should.be.a.String().and.equal(
         `method=ali.pay&format=JSON&version=1.0&biz_content={}`
