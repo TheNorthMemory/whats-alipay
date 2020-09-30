@@ -19,8 +19,8 @@ Yet Another Alipay OpenAPI Smart Development Kit
 
 ## SDK约定
 
-- 对于 Alipay OpenAPI 接口定义中的`公共请求参数`，以 `URLSearchParams` 对象传递
-- 对于 Alipay OpenAPI 接口定义中的 `请求参数` 参数部分，本SDK以标准 `JSON` 对象入参
+- 对于 Alipay OpenAPI 接口定义中的`公共请求参数`，以 `Object` 对象传递
+- 对于 Alipay OpenAPI 接口定义中的`请求参数`，本SDK以 `Object` 对象入参
 - 对于 Alipay OpenAPI 接口定义中`公共请求参数`的 `method`，即作为本SDK标准方法链，弹性扩容，示例使用方法如下，详细审查见文末
 - 请求数据签名以及返回数据验签均自动完成，开发者仅需关注业务代码即可；特别地，对于验签结果有依赖的情况，可以从返回值的头部获取：
   - `headers[x-alipay-verified]` 为验签结果，值可能为 `ok`, `undefined`
@@ -352,7 +352,15 @@ console.info(Alipay)
 
 - [ ] 返回的加密密文解密
 
+## Unit Test
+
+`npm test`
+
 ## Changelog
+
+- v0.0.3 增加测试用例及BUG修复
+
+- v0.0.2 重新发布版本
 
 - v0.0.1 初始版本
 
