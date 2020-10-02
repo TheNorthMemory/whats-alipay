@@ -37,6 +37,7 @@ describe('OpenAPI Kick Start 101', () => {
   describe('40001:Missing Required Arguments', () => {
     it('alipay.trade.query should get `missing-app-id` response', async () => {
       scope.reply(200, function(requestUri) {
+        /*eslint no-useless-escape:0*/
         const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
         const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
 
@@ -51,6 +52,7 @@ describe('OpenAPI Kick Start 101', () => {
 
     it('alipay.security.risk.content.analyze should get `missing-app-id` response', async () => {
       scope.reply(200, function(requestUri) {
+        /*eslint no-useless-escape:0*/
         const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
         const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
 
@@ -68,6 +70,7 @@ describe('OpenAPI Kick Start 101', () => {
   describe('40002:Invalid Arguments', () => {
     it('alipay.trade.query should get `invalid-app-id` response while the `app_id=2088` is passed onto the second parameters', async () => {
       scope.reply(200, function(requestUri, requestBody) {
+        /*eslint no-useless-escape:0*/
         const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
         const contents = new URLSearchParams(requestBody)
         const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
@@ -81,6 +84,7 @@ describe('OpenAPI Kick Start 101', () => {
         }
       })
 
+      /*eslint camelcase:0*/
       const res = await whats.alipay.trade.query({}, {app_id: '2088'})
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.trade.query')
@@ -90,6 +94,7 @@ describe('OpenAPI Kick Start 101', () => {
 
     it('alipay.security.risk.content.analyze should get `invalid-app-id` response while the `app_id=2088` is passed onto the second parameters', async () => {
       scope.reply(200, function(requestUri, requestBody) {
+        /*eslint no-useless-escape:0*/
         const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
         const contents = new URLSearchParams(requestBody)
         const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
@@ -103,6 +108,7 @@ describe('OpenAPI Kick Start 101', () => {
         }
       })
 
+      /*eslint camelcase:0*/
       const res = await whats.alipay.security.risk.content.analyze({}, {app_id: '2088'})
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.security.risk.content.analyze')
@@ -114,6 +120,7 @@ describe('OpenAPI Kick Start 101', () => {
   describe('40003:Insufficient Conditions', () => {
     it('alipay.trade.query should get `missing-signature-config` when `app_id=2014072300007148`', async () => {
       scope.reply(200, function(requestUri, requestBody) {
+        /*eslint no-useless-escape:0*/
         const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
         const contents = new URLSearchParams(requestBody)
         const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
@@ -129,6 +136,7 @@ describe('OpenAPI Kick Start 101', () => {
         return `{"${placeholder}":{"code":"40003","msg":"Insufficient Conditions","sub_code":"isv.missing-signature-config","sub_msg":"应用未配置对应签名算法的公钥或者证书"}}`
       })
 
+      /*eslint camelcase:0*/
       const res = await whats.alipay.trade.query({}, {app_id: '2014072300007148'})
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.trade.query')
@@ -138,6 +146,7 @@ describe('OpenAPI Kick Start 101', () => {
 
     it('alipay.security.risk.content.analyze should get `missing-signature-config` when `app_id=2014072300007148`', async () => {
       scope.reply(200, function(requestUri, requestBody) {
+        /*eslint no-useless-escape:0*/
         const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
         const contents = new URLSearchParams(requestBody)
         const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
@@ -153,6 +162,7 @@ describe('OpenAPI Kick Start 101', () => {
         return `{"${placeholder}":{"code":"40003","msg":"Insufficient Conditions","sub_code":"isv.missing-signature-config","sub_msg":"应用未配置对应签名算法的公钥或者证书"}}`
       })
 
+      /*eslint camelcase:0*/
       const res = await whats.alipay.security.risk.content.analyze({}, {app_id: '2014072300007148'})
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.security.risk.content.analyze')

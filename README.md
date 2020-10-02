@@ -356,6 +356,8 @@ console.info(Alipay)
 
 `npm test`
 
+To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm test`
+
 ## Changelog
 
 - v0.0.3 增加测试用例及BUG修复
