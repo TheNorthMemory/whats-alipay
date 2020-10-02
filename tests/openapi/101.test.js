@@ -10,6 +10,23 @@ describe('OpenAPI Kick Start 101', () => {
   let scope
   let whats
 
+  let mocks = function(requestUri, requestBody) {
+    /*eslint no-useless-escape:0*/
+    const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
+    const contents = new URLSearchParams(requestBody)
+    const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
+
+    if (!(params.has('app_id') || contents.has('app_id'))) {
+      return `{"${placeholder}":{"code":"40001","msg":"Missing Required Arguments","sub_code":"isv.missing-app-id","sub_msg":"缺少AppID参数"}}`
+    }
+
+    if (params.has('app_id') && params.get('app_id') == '2088') {
+      return `{"${placeholder}":{"code":"40002","msg":"Invalid Arguments","sub_code":"isv.invalid-app-id","sub_msg":"无效的AppID参数"}}`
+    }
+
+    return `{"${placeholder}":{"code":"40003","msg":"Insufficient Conditions","sub_code":"isv.missing-signature-config","sub_msg":"应用未配置对应签名算法的公钥或者证书"}}`
+  }
+
   beforeEach(() => {
     const privateKey = readFileSync(join(__dirname, '../fixtures/mock-app-pkcs1.key'))
     const publicCert = readFileSync(join(__dirname, '../fixtures/mock-svc-spki-pubkey.pem'))
@@ -36,13 +53,8 @@ describe('OpenAPI Kick Start 101', () => {
 
   describe('40001:Missing Required Arguments', () => {
     it('alipay.trade.query should get `missing-app-id` response', async () => {
-      scope.reply(200, function(requestUri) {
-        /*eslint no-useless-escape:0*/
-        const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
-        const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
+      scope.reply(200, mocks)
 
-        return `{"${placeholder}":{"code":"40001","msg":"Missing Required Arguments","sub_code":"isv.missing-app-id","sub_msg":"缺少AppID参数"}}`
-      })
       const res = await whats.alipay.trade.query()
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.trade.query')
@@ -51,13 +63,7 @@ describe('OpenAPI Kick Start 101', () => {
     })
 
     it('alipay.security.risk.content.analyze should get `missing-app-id` response', async () => {
-      scope.reply(200, function(requestUri) {
-        /*eslint no-useless-escape:0*/
-        const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
-        const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
-
-        return `{"${placeholder}":{"code":"40001","msg":"Missing Required Arguments","sub_code":"isv.missing-app-id","sub_msg":"缺少AppID参数"}}`
-      })
+      scope.reply(200, mocks)
 
       const res = await whats.alipay.security.risk.content.analyze()
 
@@ -69,20 +75,7 @@ describe('OpenAPI Kick Start 101', () => {
 
   describe('40002:Invalid Arguments', () => {
     it('alipay.trade.query should get `invalid-app-id` response while the `app_id=2088` is passed onto the second parameters', async () => {
-      scope.reply(200, function(requestUri, requestBody) {
-        /*eslint no-useless-escape:0*/
-        const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
-        const contents = new URLSearchParams(requestBody)
-        const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
-
-        if (!(params.has('app_id') || contents.has('app_id'))) {
-          return `{"${placeholder}":{"code":"40001","msg":"Missing Required Arguments","sub_code":"isv.missing-app-id","sub_msg":"缺少AppID参数"}}`
-        }
-
-        if (params.has('app_id') && params.get('app_id') == '2088') {
-          return `{"${placeholder}":{"code":"40002","msg":"Invalid Arguments","sub_code":"isv.invalid-app-id","sub_msg":"无效的AppID参数"}}`
-        }
-      })
+      scope.reply(200, mocks)
 
       /*eslint camelcase:0*/
       const res = await whats.alipay.trade.query({}, {app_id: '2088'})
@@ -93,20 +86,7 @@ describe('OpenAPI Kick Start 101', () => {
     })
 
     it('alipay.security.risk.content.analyze should get `invalid-app-id` response while the `app_id=2088` is passed onto the second parameters', async () => {
-      scope.reply(200, function(requestUri, requestBody) {
-        /*eslint no-useless-escape:0*/
-        const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
-        const contents = new URLSearchParams(requestBody)
-        const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
-
-        if (!(params.has('app_id') || contents.has('app_id'))) {
-          return `{"${placeholder}":{"code":"40001","msg":"Missing Required Arguments","sub_code":"isv.missing-app-id","sub_msg":"缺少AppID参数"}}`
-        }
-
-        if (params.has('app_id') && params.get('app_id') == '2088') {
-          return `{"${placeholder}":{"code":"40002","msg":"Invalid Arguments","sub_code":"isv.invalid-app-id","sub_msg":"无效的AppID参数"}}`
-        }
-      })
+      scope.reply(200, mocks)
 
       /*eslint camelcase:0*/
       const res = await whats.alipay.security.risk.content.analyze({}, {app_id: '2088'})
@@ -119,22 +99,7 @@ describe('OpenAPI Kick Start 101', () => {
 
   describe('40003:Insufficient Conditions', () => {
     it('alipay.trade.query should get `missing-signature-config` when `app_id=2014072300007148`', async () => {
-      scope.reply(200, function(requestUri, requestBody) {
-        /*eslint no-useless-escape:0*/
-        const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
-        const contents = new URLSearchParams(requestBody)
-        const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
-
-        if (!(params.has('app_id') || contents.has('app_id'))) {
-          return `{"${placeholder}":{"code":"40001","msg":"Missing Required Arguments","sub_code":"isv.missing-app-id","sub_msg":"缺少AppID参数"}}`
-        }
-
-        if (params.has('app_id') && params.get('app_id') == '2088') {
-          return `{"${placeholder}":{"code":"40002","msg":"Invalid Arguments","sub_code":"isv.invalid-app-id","sub_msg":"无效的AppID参数"}}`
-        }
-
-        return `{"${placeholder}":{"code":"40003","msg":"Insufficient Conditions","sub_code":"isv.missing-signature-config","sub_msg":"应用未配置对应签名算法的公钥或者证书"}}`
-      })
+      scope.reply(200, mocks)
 
       /*eslint camelcase:0*/
       const res = await whats.alipay.trade.query({}, {app_id: '2014072300007148'})
@@ -145,22 +110,7 @@ describe('OpenAPI Kick Start 101', () => {
     })
 
     it('alipay.security.risk.content.analyze should get `missing-signature-config` when `app_id=2014072300007148`', async () => {
-      scope.reply(200, function(requestUri, requestBody) {
-        /*eslint no-useless-escape:0*/
-        const params = new URLSearchParams(requestUri.replace(/[^\?]+(?<search>.*)/, '$<search>'))
-        const contents = new URLSearchParams(requestBody)
-        const placeholder = `${params.get('method').replace(/\./g, '_')}_response`
-
-        if (!(params.has('app_id') || contents.has('app_id'))) {
-          return `{"${placeholder}":{"code":"40001","msg":"Missing Required Arguments","sub_code":"isv.missing-app-id","sub_msg":"缺少AppID参数"}}`
-        }
-
-        if (params.has('app_id') && params.get('app_id') == '2088') {
-          return `{"${placeholder}":{"code":"40002","msg":"Invalid Arguments","sub_code":"isv.invalid-app-id","sub_msg":"无效的AppID参数"}}`
-        }
-
-        return `{"${placeholder}":{"code":"40003","msg":"Insufficient Conditions","sub_code":"isv.missing-signature-config","sub_msg":"应用未配置对应签名算法的公钥或者证书"}}`
-      })
+      scope.reply(200, mocks)
 
       /*eslint camelcase:0*/
       const res = await whats.alipay.security.risk.content.analyze({}, {app_id: '2014072300007148'})
