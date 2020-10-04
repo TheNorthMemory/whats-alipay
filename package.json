@@ -1,6 +1,6 @@
 {
   "name": "whats-alipay",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Yet Another Alipay OpenAPI SDK",
   "main": "index.js",
   "scripts": {

@@ -360,6 +360,8 @@ To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm tes
 
 ## Changelog
 
+- v0.0.4 向下兼容 `Axios` >= 0.19.0
+
 - v0.0.3 增加测试用例及BUG修复
 
 - v0.0.2 重新发布版本
