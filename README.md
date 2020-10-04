@@ -15,7 +15,7 @@ Yet Another Alipay OpenAPI Smart Development Kit
 - [x] OOP风格化的，可弹性扩容的，支付宝OpenAPI SDK
 - [x] 低依赖，目前仅依赖 `Axios`
 - [x] 使用Node原生代码实现支付宝OpenAPI的AES(`aes-128-cbc`)加/解密功能
-- [x] 使用Node原生代码实现支付宝OpenAPI的RSA(`sha1WithRsaEncryption`)及RSA2(`sha256WithRSAEncryption`)签名、验签功能
+- [x] 使用Node原生代码实现支付宝OpenAPI的RSA(`sha1WithRSAEncryption`)及RSA2(`sha256WithRSAEncryption`)签名、验签功能
 
 ## SDK约定
 
