@@ -55,6 +55,14 @@ describe('lib/formatter', () => {
       Formatter.localeDateTime('January 1, 1970, 00:00:00 UTC').should.be.a.String().and.equal('1970-01-01 08:00:00')
     })
 
+    it('method `localeDateTime(\'Sat, 21 Sep 2020 04:00:00 GMT\')` should equal to a string `2020-09-21 12:00:00`', () => {
+      Formatter.localeDateTime('Sat, 21 Sep 2020 04:00:00 GMT').should.be.a.String().and.equal('2020-09-21 12:00:00')
+    })
+
+    it('method `localeDateTime(\'Sat, 21 Sep 2020 16:00:00 GMT\')` should equal to a string `2020-09-22 00:00:00`', () => {
+      Formatter.localeDateTime('Sat, 21 Sep 2020 16:00:00 GMT').should.be.a.String().and.equal('2020-09-22 00:00:00')
+    })
+
     it('method `localeDateTime(\'Sat, 22 Sep 2020 13:14:58 GMT\')` should equal to a string `2020-09-22 21:14:58`', () => {
       Formatter.localeDateTime('Sat, 22 Sep 2020 13:14:58 GMT').should.be.a.String().and.equal('2020-09-22 21:14:58')
     })
