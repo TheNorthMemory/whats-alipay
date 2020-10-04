@@ -45,6 +45,24 @@ describe('lib/decorator', () => {
     })
   })
 
+  describe('Decorator.request', () => {
+    it('method `request` should be a static function', () => {
+      Decorator.request.should.be.a.Function()
+    })
+
+    it('called method `request` without arguments should thrown a `TypeError`', () => {
+      should(() => {
+        Decorator.request()
+      }).throw(TypeError)
+    })
+
+    it('called method `request` should thrown a `TypeError` before `new Decorator`', () => {
+      should(() => {
+        Decorator.request({})
+      }).throw(TypeError)
+    })
+  })
+
   describe('Decorator.withDefaults', () => {
     it('method `withDefaults({})` accept empty-plain-object and deepEqual to `Decorator.defaults`', () => {
       Decorator.withDefaults().should.be.an.Object().and.deepEqual(Decorator.defaults)
@@ -100,6 +118,21 @@ describe('lib/decorator', () => {
       })
       should(Decorator.client.defaults.method).be.equal(method)
       should(Decorator.client.defaults.baseURL).be.equal(baseURL)
+    })
+
+    it('The `transformResponse` should never grown up even `new Decorator({privateKey, publicCert})` did more than once', () => {
+      let baseLength = 2
+      for (let index = 0; index < 10; index++) {
+        new Decorator({
+          privateKey,
+          publicCert,
+        })
+        should(Decorator.client.defaults.transformResponse.length).be.equal(baseLength)
+        should(Decorator.client.defaults.transformResponse[0]).be.a.Function().and.have.property('name', 'verifier')
+      }
+
+      should(Decorator.client.defaults.transformResponse.length).be.equal(baseLength)
+      should(Decorator.client.defaults.transformResponse[0]).be.a.Function().and.have.property('name', 'verifier')
     })
   })
 })
