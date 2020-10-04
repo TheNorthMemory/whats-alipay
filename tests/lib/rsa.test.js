@@ -21,8 +21,8 @@ describe('lib/Rsa', () => {
   })
 
   describe('Rsa.ALGO_TYPE_RSA', () => {
-    it('property `ALGO_TYPE_RSA` should be static and have a fixed value `sha1WithRsaEncryption`', () => {
-      Rsa.ALGO_TYPE_RSA.should.be.a.String().and.equal(`sha1WithRsaEncryption`)
+    it('property `ALGO_TYPE_RSA` should be static and have a fixed value `sha1WithRSAEncryption`', () => {
+      Rsa.ALGO_TYPE_RSA.should.be.a.String().and.equal(`sha1WithRSAEncryption`)
     })
   })
 
