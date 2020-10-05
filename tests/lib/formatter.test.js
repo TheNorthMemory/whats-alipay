@@ -21,6 +21,11 @@ describe('lib/formatter', () => {
       Formatter.ksort({b: 2, aa: 1, a: 0}).should.be.an.instanceOf(Object).and.have.properties([`a`, `aa`, `b`])
       Formatter.ksort({b: 2, aa: 1, a: 0}).should.deepEqual({a: 0, aa: 1, b: 2})
     })
+
+    it('method `ksort(new URLSearchParams({b: \'2\', aa: \'1\', a: \'0\'}))` should returns an object and deepEqual to {a: \'0\', aa: \'1\', b: \'2\'}', () => {
+      Formatter.ksort(new URLSearchParams({b: '2', aa: '1', a: '0'})).should.be.an.instanceOf(Object).and.have.keys(`a`, `aa`, `b`)
+      Formatter.ksort(new URLSearchParams({b: '2', aa: '1', a: '0'})).should.deepEqual({a: '0', aa: '1', b: '2'})
+    })
   })
 
   describe('Formatter.queryStringLike', () => {

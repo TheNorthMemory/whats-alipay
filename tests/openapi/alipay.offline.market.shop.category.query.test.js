@@ -22,9 +22,7 @@ describe('openapi/alipay.offline.market.shop.category.query', () => {
     contents.forEach((value, key) => params.append(key, value))
     const payload = Formatter.queryStringLike(
       Formatter.ksort(
-        Object.fromEntries(
-          params.entries()
-        )
+        params
       )
     )
 

@@ -23,9 +23,7 @@ describe('openapi/alipay.offline.material.image.upload', () => {
     contents.forEach((value, key) => params.append(key, value))
     const payload = Formatter.queryStringLike(
       Formatter.ksort(
-        Object.fromEntries(
-          params.entries()
-        )
+        params
       )
     )
 
