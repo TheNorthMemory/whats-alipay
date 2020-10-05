@@ -156,7 +156,6 @@ describe('lib/Rsa', () => {
       should(() => {
         Rsa.verify('')
       }).throw(TypeError, {
-        code: 'ERR_INVALID_ARG_TYPE',
       })
     })
 
@@ -164,7 +163,6 @@ describe('lib/Rsa', () => {
       should(() => {
         Rsa.verify('', '')
       }).throw(TypeError, {
-        code: 'ERR_INVALID_ARG_TYPE',
       })
     })
 
