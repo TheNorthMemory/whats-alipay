@@ -2,8 +2,8 @@
 
 Yet Another Alipay OpenAPI Smart Development Kit
 
-[![GitHub version](https://badgen.net/github/release/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay)
-[![GitHub issues](https://badgen.net/github/open-issues/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay)
+[![GitHub version](https://badgen.net/github/release/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/releases)
+[![GitHub issues](https://badgen.net/github/open-issues/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/issues)
 [![nodejs version](https://badgen.net/npm/node/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay)
 [![types](https://badgen.net/npm/types/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
 [![NPM module version](https://badgen.net/npm/v/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
@@ -19,9 +19,11 @@ Yet Another Alipay OpenAPI Smart Development Kit
 
 ## SDK约定
 
-- 对于 Alipay OpenAPI 接口定义中的`公共请求参数`，以 `Object` 对象传递
-- 对于 Alipay OpenAPI 接口定义中的`请求参数`，本SDK以 `Object` 对象入参
-- 对于 Alipay OpenAPI 接口定义中`公共请求参数`的 `method`，即作为本SDK标准方法链，弹性扩容，示例使用方法如下，详细审查见文末
+- 使用 `method({请求参数}[, {公共请求参数}[, {特殊头参数}]])` 作为HTTP接口驱动，释义如下：
+  - 接口定义中`公共请求参数`的 `method`，即作为本SDK标准方法链，弹性扩容，示例使用方法如下，详细审查见文末
+  - 接口定义中的`请求参数`，以 `Object` 对象作为第一个入参
+  - 接口定义中的`公共请求参数`，以 `Object` 对象作为第二个入参
+  - 特别的，对于图片/视频上传，需要定义 `multipart/form-data` 头信息，以 `Object` 对象作为第三个入参，见如下示例
 - 请求数据签名以及返回数据验签均自动完成，开发者仅需关注业务代码即可；特别地，对于验签结果有依赖的情况，可以从返回值的头部获取：
   - `headers[x-alipay-verified]` 为验签结果，值可能为 `ok`, `undefined`
   - `headers[x-alipay-signature]` 为源返回数据签名值，值可能为 `undefined`
@@ -359,6 +361,8 @@ console.info(Alipay)
 To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm test`
 
 ## Changelog
+
+- v0.0.5 向下兼容 `NodeJS` >= 10.15.0
 
 - v0.0.4 向下兼容 `Axios` >= 0.19.0
 
