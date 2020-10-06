@@ -147,8 +147,8 @@ whats
 #### 支付API > 图片上传
 
 ```javascript
-const FormData = require('form-data')
-const payload = new FormData()
+const {Form} = require('whats-alipay')
+const payload = new Form()
 payload.append('image_content', require('fs').readFileSync('/path/for/uploading.jpg'), 'uploading.jpg')
 
 whats
@@ -165,8 +165,8 @@ whats
 #### 店铺API > 上传门店照片和视频接口
 
 ```javascript
-const FormData = require('form-data')
-const payload = new FormData()
+const Form = require('whats-alipay')
+const payload = new Form()
 payload.append('image_content', require('fs').readFileSync('/path/for/uploading.jpg'), 'uploading.jpg')
 
 whats
@@ -361,6 +361,8 @@ console.info(Alipay)
 To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm test`
 
 ## Changelog
+
+- v0.0.6 新增 `Form` 类，缩减并兼容 `form-data`
 
 - v0.0.5 向下兼容 `NodeJS` >= 10.15.0
 
