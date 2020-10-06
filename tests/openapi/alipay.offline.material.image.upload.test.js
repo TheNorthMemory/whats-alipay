@@ -3,9 +3,8 @@ const {join, extname} = require('path')
 
 require('should')
 const nock = require('nock')
-const FormData = require('form-data')
 
-const {Alipay, Formatter, Rsa, Decorator} = require('../../')
+const {Alipay, Formatter, Rsa, Decorator, Form} = require('../../')
 
 describe('openapi/alipay.offline.material.image.upload', () => {
   let scope
@@ -91,7 +90,7 @@ describe('openapi/alipay.offline.material.image.upload', () => {
   it('The response data should parsed as {code, msg, image_id, image_url}', async () => {
     scope.reply(200, mocks)
 
-    const form = new FormData()
+    const form = new Form()
     form.append('image_content', Buffer.from('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', 'base64'), 'demo.gif')
     form.append('image_type', 'gif')
     form.append('image_name', 'demo.gif')

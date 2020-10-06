@@ -4,5 +4,6 @@ module.exports.Alipay = module.exports
 module.exports.Rsa = require('./lib/rsa')
 module.exports.Aes = require('./lib/aes')
 module.exports.AesCbc = module.exports.Aes.AesCbc
+module.exports.Form = require('./lib/form')
 module.exports.Formatter = require('./lib/formatter')
 module.exports.Decorator = require('./lib/decorator')

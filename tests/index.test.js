@@ -24,6 +24,10 @@ describe('index', () => {
     should(whats.AesCbc).is.a.Function().and.have.property('name', 'AesCbc')
   })
 
+  it('should have `Form` property and be a Class', () => {
+    should(whats.Form).is.a.Function().and.have.property('name', 'Form')
+  })
+
   it('should have `Formatter` property and be a Class', () => {
     should(whats.Formatter).is.a.Function().and.have.property('name', 'Formatter')
   })
