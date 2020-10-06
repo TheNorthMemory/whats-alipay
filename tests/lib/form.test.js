@@ -101,10 +101,24 @@ describe('lib/form', () => {
 
     it('Method `getBuffer()` should returns a Buffer instance and had fixed length(108) default', () => {
       should(Form.getBuffer).be.Undefined()
+      should(() => Form.getBuffer()).throw(TypeError)
 
       const form = new Form
 
       form.getBuffer().should.be.instanceOf(Buffer).and.have.length(108)
+    })
+
+    it('Method `getHeaders()` should returns a Object[`Content-type`] with `multipart/form-data; boundary=`', () => {
+      should(Form.getHeaders).be.Undefined()
+      should(() => Form.getHeaders()).throw(TypeError)
+
+      const form = new Form
+
+      form.getHeaders().should.be.Object()
+        .and.have.keys('Content-Type')
+
+      should(form.getHeaders()['Content-Type']).be.a.String()
+        .and.match(/^multipart\/form-data; boundary=/)
     })
 
     it('Method `appendMimeTypes()` should returns the Form instance', () => {
@@ -194,6 +208,28 @@ describe('lib/form', () => {
         .and.match(/name="meta"/)
         .and.match(/Content-Type: application\/json/)
         .and.match(/.*--\r\n$/)
+    })
+
+    it('Method `append(\'image_content\', Buffer.from(\'R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\', \'base64\'), \'demo.gif\')` should append a `Content-Type: application/json` onto the `form.data` property', () => {
+      const form = new Form
+      const buf = Buffer.from('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', 'base64')
+      const filename = 'demo.gif'
+
+      form.append('image_content', buf, filename).should.be.instanceOf(Form)
+
+      should(Buffer.concat(form.data).toString()).be.String()
+        .and.match(new RegExp(`^Content-Disposition:.*?filename="${filename}`))
+        .and.match(/name="image_content"/)
+        .and.match(/Content-Type: image\/gif/)
+        .and.match(/.*\r\n$/)
+
+      should(form.getBuffer().toString()).be.String()
+        .and.match(/^--.*/)
+        .and.match(/name="image_content"/)
+        .and.match(/Content-Type: image\/gif/)
+        .and.match(/.*--\r\n$/)
+
+      should(Buffer.compare(form.data[form.indices['image_content'] - 1], buf)).be.equal(0)
     })
   })
 })
