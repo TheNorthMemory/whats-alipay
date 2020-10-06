@@ -165,7 +165,7 @@ whats
 #### 店铺API > 上传门店照片和视频接口
 
 ```javascript
-const Form = require('whats-alipay')
+const {Form} = require('whats-alipay')
 const payload = new Form()
 payload.append('image_content', require('fs').readFileSync('/path/for/uploading.jpg'), 'uploading.jpg')
 
@@ -294,9 +294,10 @@ console.info(Alipay)
     AesCbc: [class AesCbc extends Aes]
   },
   AesCbc: [class AesCbc extends Aes],
-  Formatter: <ref *4> [class Formatter] { default: [Circular *4] },
-  Decorator: <ref *5> [class Decorator] {
-    default: [Circular *5],
+  Form: <ref *4> [class Form] { default: [Circular *4] },
+  Formatter: <ref *5> [class Formatter] { default: [Circular *5] },
+  Decorator: <ref *6> [class Decorator] {
+    default: [Circular *6],
     [Symbol(PRIVATE_KEY)]: <Buffer 2d 2d 2d 2d 2d 42 45 47 49 4e 20 50 52 49 56 41 54 45 20 4b 45 59 2d 2d 2d 2d 2d 0a 4d 49 49 45 76 67 49 42 41 44 41 4e 42 67 6b 71 68 6b 69 47 39 77 ... 1653 more bytes>,
     [Symbol(PUBLIC_CERT)]: <Buffer 2d 2d 2d 2d 2d 42 45 47 49 4e 20 50 55 42 4c 49 43 20 4b 45 59 2d 2d 2d 2d 2d 0a 4d 49 49 42 49 6a 41 4e 42 67 6b 71 68 6b 69 47 39 77 30 42 41 51 45 ... 400 more bytes>,
     [Symbol(CLIENT)]: [Function: wrap] {
@@ -319,7 +320,7 @@ console.info(Alipay)
           post: { 'Content-Type': 'application/x-www-form-urlencoded' },
           put: { 'Content-Type': 'application/x-www-form-urlencoded' },
           patch: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          'User-Agent': 'WhatsAlipay/0.0.1 Node/14.5.0 darwin/x64'
+          'User-Agent': 'WhatsAlipay/0.0.6 Node/14.5.0 darwin/x64'
         },
         params: {
           app_id: '2014072300007148',
