@@ -4,7 +4,7 @@
   "description": "Yet Another Alipay OpenAPI SDK",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext \".js\" lib tests",
+    "lint": "eslint --ext \".js\" bin lib tests",
     "test": "mocha --check-leaks ./tests/*.test.js ./tests/**/*.test.js"
   },
   "engines": {
@@ -12,11 +12,16 @@
   },
   "files": [
     "index.js",
+    "bin/",
     "lib/",
     "README.md",
     "LICENSE"
   ],
+  "bin": {
+    "certHelper": "./bin/cert.js"
+  },
   "directories": {
+    "bin": "./bin",
     "lib": "./lib"
   },
   "repository": {
@@ -45,11 +50,13 @@
     "form-data": "^3.0.0"
   },
   "devDependencies": {
+    "@fidm/x509": "^1.2.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.9.0",
     "eslint-plugin-mocha": "^8.0.0",
     "mocha": "^8.1.3",
     "nock": "^13.0.4",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "yargs": "^16.0.3"
   }
 }

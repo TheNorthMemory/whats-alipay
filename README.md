@@ -31,6 +31,34 @@ Yet Another Alipay OpenAPI Smart Development Kit
 
 ## 使用手册
 
+### certHelper 命令行工具
+
+```
+Usage: cert.js [command] [options]
+
+Commands:
+  cert.js SN       get `SN`                                     [default]
+  cert.js extract  extract cert
+
+Options:
+  -f, --file     Load a file                                    [required]
+  -p, --pattern  the algo prefix or suffix, dot(.) for all
+  -h, --help     Show help                                      [boolean]
+  -V, --version  Show version number                            [boolean]
+
+Examples:
+  cert.js SN -f alipayRootCert.crt                              get the `sha256`(default) certificate `SN`
+  cert.js SN -f alipayRootCert.crt -p ec                        get the signatureAlgorithm whose contains `ec` words
+                                                                certificate `SN`
+  cert.js SN -f alipayRootCert.crt -p .                         get all chained certificate(s) `SN`
+  cert.js extract -f alipayRootCert.crt                         extract the `sha256`(default) certificate
+  cert.js extract -f alipayRootCert.crt -p sha1                 extract the `sha1` certificate
+  cert.js extract -f alipayRootCert.crt -p .                    extract all chained certificate(s)
+  cert.js extract -f alipayRootCert.crt -p sha1 | openssl x509  piped openssl x509 command
+  -noout -text
+  cert.js extract -f alipayRootCert.crt -p sha1 > tmp.pem       save to a file
+```
+
 ### 初始化
 
 ```javascript
@@ -362,6 +390,8 @@ console.info(Alipay)
 To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm test`
 
 ## Changelog
+
+- v0.0.7 新增 `Helpers` 类及 `certHelper` 命令行工具集
 
 - v0.0.6 新增 `Form` 类，缩减并兼容 `form-data`
 
