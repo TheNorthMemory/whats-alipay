@@ -210,7 +210,7 @@ describe('lib/form', () => {
         .and.match(/.*--\r\n$/)
     })
 
-    it('Method `append(\'image_content\', Buffer.from(\'R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\', \'base64\'), \'demo.gif\')` should append a `Content-Type: application/json` onto the `form.data` property', () => {
+    it('Method `append(\'image_content\', Buffer.from(\'R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\', \'base64\'), \'demo.gif\')` should append a `Content-Type: image/gif` onto the `form.data` property', () => {
       const form = new Form
       const buf = Buffer.from('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', 'base64')
       const filename = 'demo.gif'

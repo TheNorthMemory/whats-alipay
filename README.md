@@ -33,16 +33,18 @@ Yet Another Alipay OpenAPI Smart Development Kit
 
 ### certHelper 命令行工具
 
+<details>
+  <summary>$ <b>./node_modules/.bin/certHelper -h</b> (click to toggle display)</summary>
 ```
 Usage: cert.js [command] [options]
 
 Commands:
-  cert.js SN       get `SN`                                     [default]
-  cert.js extract  extract cert
+  cert.js SN       Get the certificaties(s) `SN`                [default]
+  cert.js extract  Extract the chained certificate(s)
 
 Options:
-  -f, --file     Load a file                                    [required]
-  -p, --pattern  the algo prefix or suffix, dot(.) for all
+  -f, --file     The certificate(s) file path                   [required]
+  -p, --pattern  The algo prefix or suffix, dot(.) for all
   -h, --help     Show help                                      [boolean]
   -V, --version  Show version number                            [boolean]
 
@@ -58,6 +60,7 @@ Examples:
   -noout -text
   cert.js extract -f alipayRootCert.crt -p sha1 > tmp.pem       save to a file
 ```
+</details>
 
 此命令行工具，主要是用来计算并获取 **公钥证书模式** 所需的 应用公钥证书SN(*app_cert_sn*)及 支付宝公钥证书SN(*alipay_cert_sn*)。
 
