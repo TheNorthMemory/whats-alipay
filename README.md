@@ -59,13 +59,13 @@ Examples:
   cert.js extract -f alipayRootCert.crt -p sha1 > tmp.pem       save to a file
 ```
 
-上述命令行工具，是用来获取计算 **公钥证书模式** 所需的 应用公钥证书SN(*app_cert_sn*)及 支付宝公钥证书SN(*alipay_cert_sn*)。
+此命令行工具，主要是用来计算并获取 **公钥证书模式** 所需的 应用公钥证书SN(*app_cert_sn*)及 支付宝公钥证书SN(*alipay_cert_sn*)。
 
 > ./bin/cert.js SN -f /path/your/app_cert.crt
 
 > ./bin/cert.js SN -f /path/your/alipay_root_cert.crt -p RSAEncryption
 
-上述 `SN` 命令，仅是 `Helpers.SN` 的语法糖，可从测试用例 `tests/lib/helpers.test.js` 查看更详细用法
+而`SN` 命令是 `Helpers.SN` 的语法糖，可从测试用例 `tests/lib/helpers.test.js` 查看更详细用法
 
 ### 初始化
 
