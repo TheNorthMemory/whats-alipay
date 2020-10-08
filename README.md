@@ -35,6 +35,7 @@ Yet Another Alipay OpenAPI Smart Development Kit
 
 <details>
   <summary>$ <b>./node_modules/.bin/certHelper -h</b> (click to toggle display)</summary>
+
 ```
 Usage: cert.js [command] [options]
 
