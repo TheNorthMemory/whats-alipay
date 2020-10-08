@@ -1,5 +1,5 @@
 const {readFileSync} = require('fs')
-const {join, extname} = require('path')
+const {join} = require('path')
 
 require('should')
 const nock = require('nock')
