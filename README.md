@@ -63,7 +63,7 @@ Examples:
 ```
 </details>
 
-此命令行工具，主要是用来计算并获取 **公钥证书模式** 所需的 应用公钥证书SN(*app_cert_sn*)及 支付宝公钥证书SN(*alipay_cert_sn*)。
+此命令行工具，主要是用来计算并获取 **公钥证书模式** 所需的 应用公钥证书SN(*app_cert_sn*)及 支付宝公钥证书SN(*alipay_root_cert_sn*)。
 
 > ./bin/cert.js SN -f /path/your/app_cert.crt
 
