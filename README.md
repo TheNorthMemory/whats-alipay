@@ -1017,7 +1017,7 @@ Similar to require('wordwrap') function for formatting the PEM certificate
 Mapping to `@fidm/x509`.Certificate.fromPEMs
 
 **Kind**: static method of [<code>Helpers</code>](#Helpers)
-**Returns**: <code>object</code> - - The `@fidm/x509`.Certificate instance
+**Returns**: <code>array.&lt;Certificate&gt;</code> - - Array of the `@fidm/x509`.Certificate instance
 
 | Param | Type | Description |
 | --- | --- | --- |
