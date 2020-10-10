@@ -568,7 +568,7 @@ To compose the method `chain`.
 | config | <code>object</code> | The configuration passed in `Decorator`. |
 | config.privateKey | <code>string</code> \| <code>Buffer</code> | The merchant's RSA's private key. |
 | config.publicCert | <code>string</code> \| <code>Buffer</code> | The alipay's RSA's pubkey or certificate(recommend). |
-| [config.params] | <code>object</code> | The merchant's application id. |
+| [config.params] | <code>object</code> | The general parameters. |
 | [config.params.app_id] | <code>string</code> \| <code>number</code> | The merchant's application id. |
 | [config.params.app_auth_token] | <code>string</code> | The merchant's authorization token. |
 | [config.params.app_cert_sn] | <code>string</code> | The merchant's RSA's certificate SN. |
@@ -655,7 +655,7 @@ Decorate factory
 | config | <code>object</code> | The configuration. |
 | config.privateKey | <code>string</code> \| <code>Buffer</code> | The merchant's RSA's private key. |
 | config.publicCert | <code>string</code> \| <code>Buffer</code> | The alipay's RSA's pubkey or certificate(recommend). |
-| [config.params] | <code>object</code> | The merchant's application id. |
+| [config.params] | <code>object</code> | The general parameters. |
 | [config.params.app_id] | <code>string</code> \| <code>number</code> | The merchant's application id. |
 | [config.params.app_auth_token] | <code>string</code> | The merchant's authorization token. |
 | [config.params.app_cert_sn] | <code>string</code> | The merchant's RSA's certificate SN. |
