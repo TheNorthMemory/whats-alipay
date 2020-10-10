@@ -1142,6 +1142,8 @@ To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm tes
 
 ## Changelog
 
+- v0.0.8 完善 `API` 文档 by `jsdoc2md`
+
 - v0.0.7 新增 `Helpers` 类及 `certHelper` 命令行工具集
 
 - v0.0.6 新增 `Form` 类，缩减并兼容 `form-data`
