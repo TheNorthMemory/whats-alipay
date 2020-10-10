@@ -3,7 +3,7 @@ const yargs = require('yargs')
 
 const argv = yargs
   .usage('Usage: $0 [command] [options]')
-  .command(['SN', '$0'], 'Get the certificaties(s) `SN`')
+  .command(['SN', '$0'], 'Get the certificatie(s) `SN`')
   .command('extract', 'Extract the chained certificate(s)')
   .alias('f', 'file')
   .nargs('f', 1)

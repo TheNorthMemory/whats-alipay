@@ -40,7 +40,7 @@ Yet Another Alipay OpenAPI Smart Development Kit
 Usage: cert.js [command] [options]
 
 Commands:
-  cert.js SN       Get the certificaties(s) `SN`                [default]
+  cert.js SN       Get the certificatie(s) `SN`                 [default]
   cert.js extract  Extract the chained certificate(s)
 
 Options:
