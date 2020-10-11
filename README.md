@@ -1033,9 +1033,9 @@ Mapping to `@fidm/x509`.Certificate.fromPEMs
 **Kind**: static method of [<code>Helpers</code>](#Helpers)
 **Returns**: <code>array.&lt;Certificate&gt;</code> - - Array of the `@fidm/x509`.Certificate instance
 
-| Param | Type | Description |
-| --- | --- | --- |
-| thing | <code>string</code> \| <code>Buffer</code> | The certificatie(s) file path or Buffer |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| thing | <code>string</code> \| <code>Buffer</code> |  | The certificatie(s) file path or Buffer |
 | [pattern] | <code>string</code> | <code>&quot;.&quot;</code> | The signatureAlgorithm matching pattern, default is dot(`.`) for all |
 
 <a name="Helpers.extract"></a>
