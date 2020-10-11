@@ -152,6 +152,22 @@ describe('lib/helpers', () => {
         cert.issuer.attributes.should.be.an.Array()
       })
     })
+
+    it('method `load(Buffer.concat([sha1CertBuffer, Buffer.from(\'\\n\\n\'), sha256CertBuffer]), \'sha1\')` should returns a array and contains only one class `Certificate` object', () => {
+      const certs = Helpers.load(Buffer.concat([appCert.sha1Buffer, Buffer.from('\n\n'), appCert.sha256Buffer]), 'sha1')
+      certs.should.be.Array().and.have.length(1)
+      certs[0].should.be.an.Object().have.keys('issuer', 'serialNumber', 'signatureOID')
+      certs[0].issuer.should.be.an.Object().have.keys('attributes')
+      certs[0].issuer.attributes.should.be.an.Array()
+    })
+
+    it('method `load(Buffer.concat([sha1CertBuffer, Buffer.from(\'\\n\\n\'), sha256CertBuffer]), \'sha256\')` should returns a array and contains only one class `Certificate` object', () => {
+      const certs = Helpers.load(Buffer.concat([appCert.sha1Buffer, Buffer.from('\n\n'), appCert.sha256Buffer]), 'sha256')
+      certs.should.be.Array().and.have.length(1)
+      certs[0].should.be.an.Object().have.keys('issuer', 'serialNumber', 'signatureOID')
+      certs[0].issuer.should.be.an.Object().have.keys('attributes')
+      certs[0].issuer.attributes.should.be.an.Array()
+    })
   })
 
   describe('Helpers.extract', () => {

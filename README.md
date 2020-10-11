@@ -980,7 +980,7 @@ Provide some useful functions for the catificate(s)
     * [.OIDs](#Helpers.OIDs)
     * [.md5(...things)](#Helpers.md5) ⇒ <code>string</code>
     * [.wordwrap(str, [width], [char])](#Helpers.wordwrap) ⇒ <code>string</code>
-    * [.load(thing)](#Helpers.load) ⇒ <code>object</code>
+    * [.load(thing, [pattern])](#Helpers.load) ⇒ <code>array.&lt;Certificate&gt;</code>
     * [.extract(thing, [pattern])](#Helpers.extract) ⇒ <code>string</code>
     * [.SN(thing, [pattern])](#Helpers.SN) ⇒ <code>string</code>
 
@@ -1027,7 +1027,7 @@ Similar to require('wordwrap') function for formatting the PEM certificate
 
 <a name="Helpers.load"></a>
 
-#### Helpers.load(thing) ⇒ <code>object</code>
+#### Helpers.load(thing, [pattern]) ⇒ <code>array.&lt;Certificate&gt;</code>
 Mapping to `@fidm/x509`.Certificate.fromPEMs
 
 **Kind**: static method of [<code>Helpers</code>](#Helpers)
@@ -1036,6 +1036,7 @@ Mapping to `@fidm/x509`.Certificate.fromPEMs
 | Param | Type | Description |
 | --- | --- | --- |
 | thing | <code>string</code> \| <code>Buffer</code> | The certificatie(s) file path or Buffer |
+| [pattern] | <code>string</code> | <code>&quot;.&quot;</code> | The signatureAlgorithm matching pattern, default is dot(`.`) for all |
 
 <a name="Helpers.extract"></a>
 
