@@ -953,7 +953,7 @@ Parse the `source` with given `placeholder`.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | source | <code>string</code> |  | The inputs string. |
-| [placeholder] | <code>string</code> | <code>&quot;(?&lt;ident&gt;[a-z](?:[a-z_])+)_response&quot;</code> | The payload pattern. |
+| [placeholder] | <code>string</code> | <code>`(?<ident>[a-z](?:[a-z_])+)_response`</code> | The payload pattern. |
 
 <a name="Formatter.isLeapYear"></a>
 
