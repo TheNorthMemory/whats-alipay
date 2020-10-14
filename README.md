@@ -24,6 +24,7 @@ Yet Another Alipay OpenAPI Smart Development Kit
   - 接口定义中的`请求参数`，以 `Object` 对象作为第一个入参
   - 接口定义中的`公共请求参数`，以 `Object` 对象作为第二个入参
   - 特别的，对于图片/视频上传，需要定义 `multipart/form-data` 头信息，以 `Object` 对象作为第三个入参，见如下示例
+  - 特别的，对于页面表单提交型，即所谓的page类接口，第三参数须定义为 `Formatter.page`，返回结果可直接作为页面/接口输出，说明用法见如下示例
 - 请求数据签名以及返回数据验签均自动完成，开发者仅需关注业务代码即可；特别地，对于验签结果有依赖的情况，可以从返回值的头部获取：
   - `headers[x-alipay-verified]` 为验签结果，值可能为 `ok`, `undefined`
   - `headers[x-alipay-signature]` 为源返回数据签名值，值可能为 `undefined`
