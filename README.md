@@ -97,7 +97,12 @@ whats
   .then(({headers,data}) => ({headers,data}))
   .catch(({response: {data}}) => data)
   .then(console.log)
+```
 
+<details>
+  <summary>$ <b>console.log sample result</b> (click to toggle display)</summary>
+
+```javascript
 {
   headers: {
     server: 'Tengine/2.1.0',
@@ -132,6 +137,7 @@ whats
   }
 }
 ```
+</details>
 
 #### 统一收单交易支付接口
 
@@ -163,6 +169,39 @@ whats
   .catch(({response: {data}}) => data)
   .then(console.log)
 ```
+
+#### 手机网站支付接口2.0
+
+```javascript
+whats
+  .alipay.trade.wap.pay({
+    out_trade_no,
+    subject,
+    total_amount,
+    product_code,
+    quit_url,
+  }, {}, Formatter.page)
+  .then(res => res)
+  .then(console.log)
+```
+
+- 注: 特别地 `res` 结构做了优化，直接支持 `literal`(独立服务模式: `${res}`) 或者 `JSON.stringify` (二次接口模式: `JSON.stringify(res)`)
+
+#### 统一收单下单并支付页面接口
+
+```javascript
+whats
+  .alipay.trade.page.pay({
+    out_trade_no,
+    subject,
+    total_amount,
+    product_code,
+  }, {return_url}, Formatter.page)
+  .then(res => res)
+  .then(console.log)
+```
+
+- 注: 特别地 `res` 结构做了优化，直接支持 `literal`(独立服务模式: `${res}`) 或者 `JSON.stringify` (二次接口模式: `JSON.stringify(res)`)
 
 #### 订单咨询服务
 
@@ -254,6 +293,9 @@ whats
 
 `whats` 上绑定多少 `method`，即扩容至多少，以上示例打印如下：
 
+<details>
+  <summary>$ <b>console.info sample result</b> (click to toggle display)</summary>
+
 ```javascript
 console.info(whats)
 
@@ -275,6 +317,12 @@ console.info(whats)
       precreate: [Function: alipay.trade.precreate],
       advance: [Function: alipay.trade.advance] {
         consult: [Function: alipay.trade.advance.consult]
+      },
+      page: [Function: alipay.trade.page] {
+        pay: [Function: alipay.trade.page.pay]
+      },
+      wap: [Function: alipay.trade.wap] {
+        pay: [Function: alipay.trade.wap.pay]
       }
     },
     fund: [Function: alipay.fund] {
@@ -319,8 +367,12 @@ console.info(whats)
   }
 }
 ```
+</details>
 
 `Alipay` 类实例链如下:
+
+<details>
+  <summary>$ <b>console.info sample result</b> (click to toggle display)</summary>
 
 ```javascript
 console.info(Alipay)
@@ -360,7 +412,7 @@ console.info(Alipay)
           post: { 'Content-Type': 'application/x-www-form-urlencoded' },
           put: { 'Content-Type': 'application/x-www-form-urlencoded' },
           patch: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          'User-Agent': 'WhatsAlipay/0.0.6 Node/14.5.0 darwin/x64'
+          'User-Agent': 'WhatsAlipay/0.0.9 Node/14.5.0 darwin/x64'
         },
         params: {
           app_id: '2014072300007148',
@@ -390,6 +442,7 @@ console.info(Alipay)
   }
 }
 ```
+</details>
 
 ## API(s)
 
@@ -727,6 +780,8 @@ Decorate factory
 Portable of the `axios.request` with defaults {method, params, headers}
 compatible since Axios >= 0.19.0
 
+- Typeof `function` of `config.headers` is avaliable since v0.0.9
+
 **Kind**: static method of [<code>Decorator</code>](#Decorator)
 **Returns**: <code>PromiseLike</code> - - The `AxiosPromise` instance.
 
@@ -735,7 +790,7 @@ compatible since Axios >= 0.19.0
 | config | <code>object</code> | The configuration. |
 | config.data | <code>object</code> \| <code>Buffer</code> \| <code>undefined</code> | The post data |
 | config.params | <code>object</code> \| <code>undefined</code> | The search parameters |
-| config.headers | <code>object</code> \| <code>undefined</code> | The request's headers |
+| config.headers | <code>object</code> \| <code>function</code> \| <code>undefined</code> | The request's headers object or a callback `function` for `sign-only` requests |
 
 <a name="Decorator.withDefaults"></a>
 
@@ -897,6 +952,7 @@ Provides easy used methods using in this project.
     * [.localeDateTime([when], [timeZone])](#Formatter.localeDateTime) ⇒ <code>string</code>
     * [.fromJsonLike(source, [placeholder])](#Formatter.fromJsonLike) ⇒ <code>object</code>
     * [.isLeapYear(numeric)](#Formatter.isLeapYear) ⇒ <code>boolean</code>
+    * [.page(options)](#Formatter.page) ⇒ <code>object</code>
 
 <a name="new_Formatter_new"></a>
 
@@ -953,7 +1009,7 @@ Parse the `source` with given `placeholder`.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | source | <code>string</code> |  | The inputs string. |
-| [placeholder] | <code>string</code> | <code>`(?<ident>[a-z](?:[a-z_])+)_response`</code> | The payload pattern. |
+| [placeholder] | <code>string</code> | `(?<ident>[a-z](?:[a-z_])+)_response` | The payload pattern. |
 
 <a name="Formatter.isLeapYear"></a>
 
@@ -966,6 +1022,31 @@ Check the given `numeric` input whether or nor the leap year.
 | Param | Type | Description |
 | --- | --- | --- |
 | numeric | <code>number</code> | The inputs number. |
+
+<a name="Formatter.page"></a>
+
+#### Formatter.page(options) ⇒ <code>object</code>
+Translate the inputs for the page service, such as `alipay.trade.page.pay`, `alipay.trade.wap.pay` OpenAPI methods.
+
+- Avaliable since v0.0.9
+
+**Kind**: static method of [<code>Formatter</code>](#Formatter)
+**Returns**: <code>object</code> - - Minimal following the `AxiosResponse` specification, returns `{data, toJSON(), toString()}` object
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>object</code> | The inputs |
+| options.baseURL | <code>string</code> | The OpenAPI gateway URL |
+| options.method | <code>string</code> | The HTTP method, should be `get` or `post`, default is `post` |
+| options.params | <code>object</code> | The gernal paramters object, including `method`, `version`, `charset`, `sign_type`, `format` etc. |
+| options.params.method | <code>string</code> | The OpenAPI's `method`, should be `alipay.trade.page.pay` etc. |
+| options.params.version | <code>string</code> | The OpenAPI's `version`, default is `1.0` |
+| options.params.charset | <code>string</code> | The OpenAPI's `charset`, default is `utf-8` |
+| options.params.format | <code>string</code> | The OpenAPI's `format`, default is `JSON` |
+| options.params.sign_type | <code>string</code> | The OpenAPI's `sign_type`, default is `RSA2` |
+| options.data | <code>URLSearchParams</code> | The `biz_content` and `sign` contents |
+| options.data.biz_content | <code>string</code> | The OpenAPI's `biz_content`, json string |
+| options.data.sign | <code>string</code> | The OpenAPI's `sign`, base64 encoded string dependent on the `options.params.sign_type` |
 
 <a name="Helpers"></a>
 
