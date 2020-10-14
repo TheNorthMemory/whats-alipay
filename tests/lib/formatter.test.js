@@ -123,5 +123,52 @@ describe('lib/formatter', () => {
     it('method `isLeapYear` should be a static function', () => {
       Formatter.isLeapYear.should.be.a.Function()
     })
+
+    it('method `isLeapYear(2020)` should be `True`', () => {
+      Formatter.isLeapYear(2020).should.be.True()
+    })
+  })
+
+  describe('Formatter.page', () => {
+    it('method `page` should be a static function', () => {
+      Formatter.page.should.be.a.Function()
+    })
+
+    it('method `page()` without any arguments should returns an Object, and have keys{data, toJSON, toString}', () => {
+      Formatter.page().should.be.an.Object().and.have.keys('data','toJSON', 'toString')
+    })
+
+    it('method `page().data` should be an Object and have keys `baseURL`, `method`, `params`, `body`, `html`', () => {
+      const res = Formatter.page()
+      res.data.should.be.an.Object().and.have.keys('baseURL', 'method', 'params', 'body', 'html')
+      res.data.baseURL.should.be.a.String()
+      res.data.method.should.be.a.String()
+      res.data.params.should.be.an.Object()
+      res.data.body.should.be.an.Object()
+      res.data.html.should.be.a.String().and.match(/.*<form[^>]+>.*?<\/form>.*/)
+    })
+
+    it('method `page().toJSON` should be a Function and executed result equal to `page().data`', () => {
+      const res = Formatter.page()
+      res.toJSON.should.be.a.Function()
+      res.toJSON().should.be.an.Object().and.deepEqual(res.data)
+    })
+
+    it('method `page().toString` should be a Function and executed result equal to `page().data.html`', () => {
+      const res = Formatter.page()
+      res.toString.should.be.a.Function()
+      res.toString().should.be.a.String().and.deepEqual(res.data.html)
+    })
+
+    it('literal operation the method `${page()}` should deep equal to `page().data.html`', () => {
+      const res = Formatter.page()
+      should(`${res}`).be.deepEqual(res.data.html)
+    })
+
+    it('method `JSON.stringify(page())` should deep equal to `JSON.stringify(page().data)`', () => {
+      const res = Formatter.page()
+      res.toString.should.be.a.Function()
+      should(JSON.stringify(res)).be.deepEqual(JSON.stringify(res.data))
+    })
   })
 })
