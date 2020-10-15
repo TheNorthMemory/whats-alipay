@@ -11,7 +11,7 @@ describe('openapi/alipay.trade.wap.pay', () => {
   let scope
   let whats
 
-  let subject = '唯Bug与代码不可辜负', outTradeNo = 'out_trade_no', totalAmouunt = 'total_amount', productCode = 'product_code', quitUrl = 'quit_url'
+  let subject = '唯Bug与代码不可辜负', outTradeNo = 'out_trade_no', totalAmount = 'total_amount', productCode = 'product_code', quitUrl = 'quit_url'
 
   let appPublicCert = readFileSync(join(__dirname, '../fixtures/mock-app-spki-pubkey.pem'))
   let mocks = function(requestUri, requestBody) {
@@ -32,16 +32,16 @@ describe('openapi/alipay.trade.wap.pay', () => {
       `{"code":"40002","msg":"Invalid Arguments","sub_code":"isv.invalid-signature","sub_msg":"验签出错，建议检查签名字符串或签名私钥与应用公钥是否匹配，网关生成的验签字符串为：${payload.replace(/&(?!amp;)/g, '&amp;')}"}`,
       `</div>`,`</body>`,`</html>`].join('\r\n')
     }
+
     let bizContent = `biz_content`, biz
     try {
       biz = JSON.parse(contents.get(bizContent))
     } catch { /*ignore*/ }
-    if (!(biz && biz.subject && biz.subject && biz[outTradeNo] && biz[totalAmouunt] && biz[productCode] && biz[quitUrl])) {
+    if (!(biz && biz.subject && biz[outTradeNo] && biz[totalAmount] && biz[productCode] && biz[quitUrl])) {
       return [`<html>`,`<head>`,`<meta charset="${params.get('charset') || 'gb2312'}"/>`,`</head>`,`<body>`,`<div>`,
       `BIZ_CONTENT_FORMAT_ERROR`,
       `</div>`,`</body>`,`</html>`].join('\r\n')
     }
-
 
     return `<html><body>MOCK REDIRECT</body></html>`
   }
@@ -81,7 +81,7 @@ describe('openapi/alipay.trade.wap.pay', () => {
     const res = await whats.alipay.trade.wap.pay({
       subject,
       [outTradeNo]: `PO${+new Date}`,
-      [totalAmouunt]: '0.01',
+      [totalAmount]: '0.01',
       [productCode]: 'FAST_INSTANT_TRADE_PAY',
       [quitUrl]: 'https://forum.alipay.com/mini-app/post/15501011',
     }, {}, Formatter.page)
@@ -111,7 +111,7 @@ describe('openapi/alipay.trade.wap.pay', () => {
     const res = await whats.alipay.trade.wap.pay({
       subject,
       [outTradeNo]: `PO${+new Date}`,
-      [totalAmouunt]: '0.01',
+      [totalAmount]: '0.01',
       [productCode]: 'FAST_INSTANT_TRADE_PAY',
       [quitUrl]: 'https://forum.alipay.com/mini-app/post/15501011',
     }, {}, Formatter.page)
@@ -141,7 +141,7 @@ describe('openapi/alipay.trade.wap.pay', () => {
     const res = await whats.alipay.trade.wap.pay({
       // subject,
       [outTradeNo]: `PO${+new Date}`,
-      [totalAmouunt]: '0.01',
+      [totalAmount]: '0.01',
       [productCode]: 'FAST_INSTANT_TRADE_PAY',
       [quitUrl]: 'https://forum.alipay.com/mini-app/post/15501011',
     }, {}, Formatter.page)
@@ -175,7 +175,7 @@ describe('openapi/alipay.trade.wap.pay', () => {
     const res = await whats.alipay.trade.wap.pay({
       subject,
       [outTradeNo]: `PO${+new Date}`,
-      [totalAmouunt]: '0.01',
+      [totalAmount]: '0.01',
       [productCode]: 'FAST_INSTANT_TRADE_PAY',
       [quitUrl]: 'https://forum.alipay.com/mini-app/post/15501011',
     }, {}, Formatter.page)
