@@ -145,7 +145,7 @@ describe('lib/formatter', () => {
       res.data.method.should.be.a.String()
       res.data.params.should.be.an.Object()
       res.data.body.should.be.an.Object()
-      res.data.html.should.be.a.String().and.match(/.*<form[^>]+>.*?<\/form>.*/)
+      res.data.html.should.be.a.String().and.match(/<form[^>]+>.*?<\/form>/).and.match(/<script>.*?<\/script>/)
     })
 
     it('method `page().toJSON` should be a Function and executed result equal to `page().data`', () => {
