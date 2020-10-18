@@ -70,7 +70,7 @@ Examples:
 
 > ./bin/cert.js SN -f /path/your/alipay_root_cert.crt -p RSAEncryption
 
-而`SN` 命令是 `Helpers.SN` 的语法糖，可从测试用例 `tests/lib/helpers.test.js` 查看更详细用法
+而`SN` 命令是 `Helpers.SN` 的语法糖，可从如下[API文档](#Helpers.SN)查看更详细用法
 
 ### 初始化
 
@@ -89,6 +89,9 @@ const publicCert = readFileSync('/the/alipay/public_cert.pem')
 
 const whats = new Alipay({ privateKey, publicCert, params: { app_id, } })
 ```
+
+> *证书完整格式* 是指：
+> 包含 `-----BEGIN` 及 `END-----`，内容是列宽64字符的`base64-encoded`，可直接用 `openssl` 命令行工具进行验证格式。
 
 #### 统一收单线下交易查询
 
