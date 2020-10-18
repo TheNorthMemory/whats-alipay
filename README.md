@@ -1239,6 +1239,8 @@ To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm tes
 
 ## Changelog
 
+- v0.0.10 优化 `Formatter.page().data.html`, 重点兼容`utf8`
+
 - v0.0.9 新增 `Formatter.page` 函数，支持`page`类接口调用(以第三入参回调)
 
 - v0.0.8 完善 `API` 文档 by `jsdoc2md`
