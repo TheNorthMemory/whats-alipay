@@ -781,7 +781,7 @@ Decorate factory
 Portable of the `axios.request` with defaults {method, params, headers}
 compatible since Axios >= 0.19.0
 
-- Typeof `function` of `config.headers` is avaliable since v0.0.9
+- Typeof `function` of `config.headers` is available since v0.0.9
 
 **Kind**: static method of [<code>Decorator</code>](#Decorator)
 **Returns**: <code>PromiseLike</code> - - The `AxiosPromise` instance.
@@ -996,8 +996,8 @@ Notes: NodeJS v10.15.3,v12.18.0,v14.5.0 had strange behavior on `Intl.DateTimeFo
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [when] | <code>string</code> \| <code>number</code> \| <code>Date</code> |  | Any avaliable inputs refer to the `Date() constructor`, default `Date.now()`. |
-| [timeZone] | <code>string</code> | <code>&quot;Asia/Shanghai&quot;</code> | Any avaliable inputs refer to the options in `Intl.DateTimeFormat`, default `Asia/Shanghai`. |
+| [when] | <code>string</code> \| <code>number</code> \| <code>Date</code> |  | Any available inputs refer to the `Date() constructor`, default `Date.now()`. |
+| [timeZone] | <code>string</code> | <code>&quot;Asia/Shanghai&quot;</code> | Any available inputs refer to the options in `Intl.DateTimeFormat`, default `Asia/Shanghai`. |
 
 <a name="Formatter.fromJsonLike"></a>
 
@@ -1029,7 +1029,7 @@ Check the given `numeric` input whether or nor the leap year.
 #### Formatter.page(options) ⇒ <code>object</code>
 Translate the inputs for the page service, such as `alipay.trade.page.pay`, `alipay.trade.wap.pay` OpenAPI methods.
 
-- Avaliable since v0.0.9
+- Available since v0.0.9
 
 **Kind**: static method of [<code>Formatter</code>](#Formatter)
 **Returns**: <code>object</code> - - Minimal following the `AxiosResponse` specification, returns `{data, toJSON(), toString()}` object
@@ -1227,9 +1227,6 @@ Verifying the `message` with given `signature` string that uses given `type=RSA|
 | publicCertificate | <code>string</code> \| <code>Buffer</code> | A PEM encoded public certificate. |
 | [type] | <code>string</code> | one of the algo alias RSA/RSA2, default is `RSA2`. |
 
-## TODO
-
-- [ ] 返回的加密密文解密
 
 ## Unit Test
 
