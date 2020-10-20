@@ -63,6 +63,7 @@ Examples:
   merchant.key -p alipay.pub -m alipay.trade.query              with trace logging
   -s.app_id=2088 -b.out_trade_no=Kitty0001
 ```
+</details>
 
 ### certHelper 命令行工具
 
