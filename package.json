@@ -18,6 +18,7 @@
     "LICENSE"
   ],
   "bin": {
+    "whatsCli": "./bin/cli.js",
     "certHelper": "./bin/cert.js"
   },
   "directories": {

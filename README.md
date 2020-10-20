@@ -32,6 +32,38 @@ Yet Another Alipay OpenAPI Smart Development Kit
 
 ## 使用手册
 
+### whatsCli 命令行工具
+
+<details>
+  <summary>$ <b>./node_modules/.bin/whatsCli -h</b> (click to toggle display)</summary>
+
+```
+Usage: cli.js [options]
+
+Options:
+  -k, --privateKey  The privateKey pem file path                                                              [required]
+  -p, --publicCert  The publicCert pem file path                                                              [required]
+  -m, --method      The method, eg: alipay.trade.query                                                        [required]
+  -s, --search      The search parameters, eg: search.app_id=2088                                             [required]
+  -b, --biz         The biz_content, eg: biz.out_trade_no=abcd1234                                            [required]
+  -d, --log         Turn on the request trace log                                                              [boolean]
+  -u, --baseURL     The OpenAPI gateway, eg: https://openapi.alipaydev.com/gateway.do
+  -h, --help        Show help                                                                                  [boolean]
+  -V, --version     Show version number                                                                        [boolean]
+
+Examples:
+  cli.js -k merchant.key -p alipay.pub -m alipay.trade.pay      The Face2Face barCode scenario
+  -s.app_id=2088 -b.subject=HelloKitty
+  -b.out_trade_no=Kitty0001 -b.scene=bar_code
+  -b.total_amount=0.01 -b.auth_code=
+  cli.js -k merchant.key -p alipay.pub -m alipay.trade.refund   The trade refund scenario
+  -s.app_id=2088 -b.refund_amount=0.01 -b.refund_currency=CNY
+  -b.out_trade_no=Kitty0001
+  cli.js -d -u https://openapi.alipaydev.com/gateway.do -k      The trade query scenario over the sandbox environment
+  merchant.key -p alipay.pub -m alipay.trade.query              with trace logging
+  -s.app_id=2088 -b.out_trade_no=Kitty0001
+```
+
 ### certHelper 命令行工具
 
 <details>
@@ -1238,6 +1270,8 @@ Verifying the `message` with given `signature` string that uses given `type=RSA|
 To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm test`
 
 ## Changelog
+
+- v0.0.11 新增 `whatsCli` `cli.js` 命令行交互工具
 
 - v0.0.10 优化 `Formatter.page().data.html`, 重点兼容`utf8`
 
