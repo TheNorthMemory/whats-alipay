@@ -5,7 +5,6 @@ Yet Another Alipay OpenAPI Smart Development Kit
 [![GitHub version](https://badgen.net/github/release/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/releases)
 [![GitHub issues](https://badgen.net/github/open-issues/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/issues)
 [![nodejs version](https://badgen.net/npm/node/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay)
-[![types](https://badgen.net/npm/types/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
 [![NPM module version](https://badgen.net/npm/v/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
 [![NPM module downloads per month](https://badgen.net/npm/dm/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
 [![NPM module license](https://badgen.net/npm/license/wechatpay-axios-plugin)](https://www.npmjs.com/package/whats-alipay)
@@ -16,6 +15,7 @@ Yet Another Alipay OpenAPI Smart Development Kit
 - [x] 低依赖，目前仅依赖 `Axios`
 - [x] 使用Node原生代码实现支付宝OpenAPI的AES(`aes-128-cbc`)加/解密功能
 - [x] 使用Node原生代码实现支付宝OpenAPI的RSA(`sha1WithRSAEncryption`)及RSA2(`sha256WithRSAEncryption`)签名、验签功能
+- [x] 异步通知消息验签
 
 ## SDK约定
 
@@ -480,6 +480,25 @@ console.info(Alipay)
 }
 ```
 </details>
+
+## 异步通知消息验签
+
+通知消息验签，依赖相关 `webserver` 提供的 `POST` 数据解析能力，以下函数在 `http.createServer` 上做过验证，仅供参考。
+
+```javascript
+function notificationValidator(things, publicCert, withoutSignType = true) {
+  const {groups: {sign}} = (typeof things === 'string' ? things : '').match(/\bsign=(?<sign>[^&]+)/) || {groups: {}}
+  const source = [...new URLSearchParams(things)].reduce((des, [key, value]) => (des[key] = value, des), {})
+  const signType = source['sign_type']
+  const signature = (source.sign || '').replace(/ /g, '+').replace(/_/g, '/')
+  // The signature with `sign_type` is only for the notifications whose come from `alipay.open.public.*` APIs.
+  if (withoutSignType) {
+      delete source['sign_type']
+  }
+
+  return Rsa.verify(Formatter.queryStringLike(Formatter.ksort(source)), sign || signature, publicCert, signType)
+}
+```
 
 ## API(s)
 
@@ -1271,6 +1290,12 @@ Verifying the `message` with given `signature` string that uses given `type=RSA|
 To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm test`
 
 ## Changelog
+
+- v0.1.0
+  - 调整 `同步应答验签` 逻辑，遵从本SDK约定，只要能从应答返回中解析出有效负载，即仅返回负载；
+  - 新增 `异步通知消息` 验签文档示例函数；
+  - 暂时不支持`ts`，相关问题 #4；
+  - `npm install --no-optional`(>5.8.0)不起作用，不再可选依赖 `form-data`，以内置 `Form` 类为主；
 
 - v0.0.11 新增 `whatsCli` `cli.js` 命令行交互工具
 
