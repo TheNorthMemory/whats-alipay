@@ -58,8 +58,8 @@ describe('OpenAPI Kick Start 101', () => {
       const res = await whats.alipay.trade.query()
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.trade.query')
-      res.data.should.have.keys('alipay_trade_query_response').and.instanceof(Object)
-      res.data['alipay_trade_query_response'].should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.missing-app-id')
+      res.data.should.not.have.keys('alipay_trade_query_response').and.instanceof(Object)
+      res.data.should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.missing-app-id')
     })
 
     it('alipay.security.risk.content.analyze should get `missing-app-id` response', async () => {
@@ -68,8 +68,8 @@ describe('OpenAPI Kick Start 101', () => {
       const res = await whats.alipay.security.risk.content.analyze()
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.security.risk.content.analyze')
-      res.data.should.have.keys('alipay_security_risk_content_analyze_response').and.instanceof(Object)
-      res.data['alipay_security_risk_content_analyze_response'].should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.missing-app-id')
+      res.data.should.not.have.keys('alipay_security_risk_content_analyze_response').and.instanceof(Object)
+      res.data.should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.missing-app-id')
     })
   })
 
@@ -81,8 +81,8 @@ describe('OpenAPI Kick Start 101', () => {
       const res = await whats.alipay.trade.query({}, {app_id: '2088'})
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.trade.query')
-      res.data.should.have.keys('alipay_trade_query_response').and.instanceof(Object)
-      res.data['alipay_trade_query_response'].should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.invalid-app-id')
+      res.data.should.not.have.keys('alipay_trade_query_response').and.instanceof(Object)
+      res.data.should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.invalid-app-id')
     })
 
     it('alipay.security.risk.content.analyze should get `invalid-app-id` response while the `app_id=2088` is passed onto the second parameters', async () => {
@@ -92,8 +92,8 @@ describe('OpenAPI Kick Start 101', () => {
       const res = await whats.alipay.security.risk.content.analyze({}, {app_id: '2088'})
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.security.risk.content.analyze')
-      res.data.should.have.keys('alipay_security_risk_content_analyze_response').and.instanceof(Object)
-      res.data['alipay_security_risk_content_analyze_response'].should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.invalid-app-id')
+      res.data.should.not.have.keys('alipay_security_risk_content_analyze_response').and.instanceof(Object)
+      res.data.should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.invalid-app-id')
     })
   })
 
@@ -105,8 +105,8 @@ describe('OpenAPI Kick Start 101', () => {
       const res = await whats.alipay.trade.query({}, {app_id: '2014072300007148'})
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.trade.query')
-      res.data.should.have.keys('alipay_trade_query_response').and.instanceof(Object)
-      res.data['alipay_trade_query_response'].should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.missing-signature-config')
+      res.data.should.not.have.keys('alipay_trade_query_response').and.instanceof(Object)
+      res.data.should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.missing-signature-config')
     })
 
     it('alipay.security.risk.content.analyze should get `missing-signature-config` when `app_id=2014072300007148`', async () => {
@@ -116,8 +116,8 @@ describe('OpenAPI Kick Start 101', () => {
       const res = await whats.alipay.security.risk.content.analyze({}, {app_id: '2014072300007148'})
 
       res.headers.should.have.keys('x-alipay-responder', 'x-alipay-signature').and.have.property('x-alipay-responder', 'alipay.security.risk.content.analyze')
-      res.data.should.have.keys('alipay_security_risk_content_analyze_response').and.instanceof(Object)
-      res.data['alipay_security_risk_content_analyze_response'].should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.missing-signature-config')
+      res.data.should.not.have.keys('alipay_security_risk_content_analyze_response').and.instanceof(Object)
+      res.data.should.have.keys('code', 'sub_code').and.have.property('sub_code', 'isv.missing-signature-config')
     })
   })
 })
