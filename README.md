@@ -16,6 +16,7 @@ Yet Another Alipay OpenAPI Smart Development Kit
 - [x] 使用Node原生代码实现支付宝OpenAPI的AES(`aes-128-cbc`)加/解密功能
 - [x] 使用Node原生代码实现支付宝OpenAPI的RSA(`sha1WithRSAEncryption`)及RSA2(`sha256WithRSAEncryption`)签名、验签功能
 - [x] 异步通知消息验签
+- [x] 命令行网关交互工具
 
 ## SDK约定
 
@@ -33,6 +34,8 @@ Yet Another Alipay OpenAPI Smart Development Kit
 ## 使用手册
 
 ### whatsCli 命令行工具
+
+以命令行的形式，与OpenAPI网关交互，play the OpenAPI requests over command line.
 
 <details>
   <summary>$ <b>./node_modules/.bin/whatsCli -h</b> (click to toggle display)</summary>
@@ -124,7 +127,7 @@ const whats = new Alipay({ privateKey, publicCert, params: { app_id, } })
 ```
 
 > *证书完整格式* 是指：
-> 包含 `-----BEGIN` 及 `END-----`，内容是列宽64字符的`base64-encoded`，可直接用 `openssl` 命令行工具进行验证格式。
+> 包含 `-----BEGIN` 及 `-----END`，内容是列宽64的`base64-encoded`字符串，可直接用 `openssl` 命令行工具进行验证格式。
 
 #### 统一收单线下交易查询
 
