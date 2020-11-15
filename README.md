@@ -1294,6 +1294,12 @@ To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm tes
 
 ## Changelog
 
+- v0.1.1
+  - 输出 `Helpers` 为本模块基础类之一；
+  - 优化 `Helpers.SN` 方法，兼容多`DN`属性情况；
+  - 优化 `Formatter.localeDateTime` 方法，使用 `String.padStart` 计算 `h23` 小时；
+  - 优化文档及测试用例覆盖；
+
 - v0.1.0
   - 调整 `同步应答验签` 逻辑，遵从本SDK约定，只要能从应答返回中解析出有效负载，即仅返回负载；
   - 新增 `异步通知消息` 验签文档示例函数；
