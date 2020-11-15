@@ -7,3 +7,4 @@ module.exports.AesCbc = module.exports.Aes.AesCbc
 module.exports.Form = require('./lib/form')
 module.exports.Formatter = require('./lib/formatter')
 module.exports.Decorator = require('./lib/decorator')
+module.exports.Helpers = require('./lib/helpers')

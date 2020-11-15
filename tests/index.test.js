@@ -35,4 +35,8 @@ describe('index', () => {
   it('should have `Decorator` property and be a Class', () => {
     should(whats.Decorator).is.a.Function().and.have.property('name', 'Decorator')
   })
+
+  it('should have `Helpers` property and be a Class', () => {
+    should(whats.Helpers).is.a.Function().and.have.property('name', 'Helpers')
+  })
 })
