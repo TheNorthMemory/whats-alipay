@@ -7,7 +7,7 @@ Yet Another Alipay OpenAPI Smart Development Kit
 [![nodejs version](https://badgen.net/npm/node/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay)
 [![NPM module version](https://badgen.net/npm/v/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
 [![NPM module downloads per month](https://badgen.net/npm/dm/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
-[![NPM module license](https://badgen.net/npm/license/wechatpay-axios-plugin)](https://www.npmjs.com/package/whats-alipay)
+[![NPM module license](https://badgen.net/npm/license/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
 
 ## 主要功能
 
