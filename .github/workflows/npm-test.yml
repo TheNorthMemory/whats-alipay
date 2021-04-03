@@ -25,4 +25,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
+      - run: npm install @fidm/x509@"^1.2.1" --no-save
       - run: npm test
