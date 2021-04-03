@@ -45,19 +45,21 @@
   },
   "homepage": "https://github.com/TheNorthMemory/whats-alipay#readme",
   "dependencies": {
-    "axios": ">=0.21.1"
+    "axios": "^0.21.1"
   },
-  "optionalDependencies": {
+  "peerDependencies": {
     "@fidm/x509": "^1.2.1",
-    "yargs": "^16.0.3"
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.9.0",
-    "eslint-plugin-mocha": "^8.0.0",
-    "jsdoc-to-markdown": "^6.0.1",
-    "mocha": "^8.1.3",
-    "nock": "^13.0.4",
+    "@babel/core": "^7.13.14",
+    "@babel/eslint-parser": "^7.13.14",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-mocha": "^8.1.0",
+    "mocha": "^8.3.2",
+    "nock": "^13.0.11",
     "should": "^13.2.3"
   }
 }
