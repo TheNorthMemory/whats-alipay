@@ -4,7 +4,7 @@
   "description": "Yet Another Alipay OpenAPI SDK",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext \".js\" bin lib tests",
+    "lint": "eslint --ext \".js\" index.js bin lib tests",
     "test": "mocha --check-leaks ./tests/*.test.js ./tests/**/*.test.js"
   },
   "engines": {
