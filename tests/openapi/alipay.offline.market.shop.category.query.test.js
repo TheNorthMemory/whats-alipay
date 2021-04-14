@@ -31,7 +31,7 @@ describe('openapi/alipay.offline.market.shop.category.query', () => {
     let data;
     if (!Rsa.verify(payload, params.get('sign'), appPublicCert, params.get('sign_type'))) {
       data = '{"code":"40002","msg":"Invalid Arguments",'
-      + '\'"sub_code":"isv.invalid-signature",'
+      + '"sub_code":"isv.invalid-signature",'
       + `"sub_msg":"验签出错，建议检查签名字符串或签名私钥与应用公钥是否匹配，网关生成的验签字符串为：${payload.replace(/&(?!amp;)/g, '&amp;')}"}`;
     } else {
       data = readFileSync(join(__dirname, `../fixtures/${params.get('method')}.json`)).toString();
