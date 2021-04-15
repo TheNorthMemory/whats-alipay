@@ -8,7 +8,7 @@
     "test": "mocha --check-leaks ./tests/*.test.js ./tests/**/*.test.js"
   },
   "engines": {
-    "node": ">=10.15.0"
+    "node": ">=10.15"
   },
   "files": [
     "index.js",

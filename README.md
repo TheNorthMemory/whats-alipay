@@ -2,9 +2,9 @@
 
 Yet Another Alipay OpenAPI Smart Development Kit
 
-[![GitHub version](https://badgen.net/github/release/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/releases)
+[![GitHub actions](https://github.com/TheNorthMemory/wechatpay-axios-plugin/workflows/ci/badge.svg)](https://github.com/TheNorthMemory/whats-alipay/actions)
 [![GitHub issues](https://badgen.net/github/open-issues/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/issues)
-[![nodejs version](https://badgen.net/npm/node/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay)
+[![nodejs version](https://badgen.net/npm/node/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/releases)
 [![NPM module version](https://badgen.net/npm/v/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
 [![NPM module downloads per month](https://badgen.net/npm/dm/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
 [![NPM module license](https://badgen.net/npm/license/whats-alipay)](https://www.npmjs.com/package/whats-alipay)

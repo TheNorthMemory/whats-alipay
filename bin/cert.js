@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-const yargs = require('yargs')
+const yargs = require('yargs');
 
-const argv = yargs
+const { argv } = yargs
   .usage('Usage: $0 [command] [options]')
   .command(['SN', '$0'], 'Get the certificatie(s) `SN`')
   .command('extract', 'Extract the chained certificate(s)')
@@ -15,7 +15,7 @@ const argv = yargs
   .alias('h', 'help')
   .version()
   .alias('V', 'version')
-  .wrap(yargs.terminalWidth())
+  .wrap(null)
   .example([
     ['$0 SN -f alipayRootCert.crt', 'get the `sha256`(default) certificate `SN`'],
     ['$0 SN -f alipayRootCert.crt -p ec', 'get the signatureAlgorithm whose contains `ec` words certificate `SN`'],
@@ -25,10 +25,11 @@ const argv = yargs
     ['$0 extract -f alipayRootCert.crt -p .', 'extract all chained certificate(s)'],
     ['$0 extract -f alipayRootCert.crt -p sha1 | openssl x509 -noout -text', 'piped openssl x509 command'],
     ['$0 extract -f alipayRootCert.crt -p sha1 > tmp.pem', 'save to a file'],
-  ])
-  .argv
+  ]);
 
-const Helpers = require('../lib/helpers')
-const {_: [cmd = 'SN'], file, pattern} = argv
+const Helpers = require('../lib/helpers');
 
-console.log(Helpers[cmd](file, pattern))
+const { _: [cmd = 'SN'], file, pattern } = argv;
+
+/* eslint-disable-next-line no-console */
+console.log(Helpers[cmd](file, pattern));
