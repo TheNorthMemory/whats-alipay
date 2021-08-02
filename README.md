@@ -116,11 +116,15 @@ const { Alipay, Rsa } = require('whats-alipay');
 //应用app_id
 const app_id = '2014072300007148';
 
-//商户RSA私钥，格式为 'private.pkcs1://' 或者 'private.pkcs8://' + '从官方工具获取到的字符串'
-const privateKey = Rsa.from('private.pkcs1://MIIEpAIBAAKCAQEApdXuft3as2x...');
+//商户RSA私钥，入参是'从官方工具获取到的BASE64字符串'
+const privateKey = Rsa.fromPkcs1('MIIEpAIBAAKCAQEApdXuft3as2x...');
+// 以上是下列代码的语法糖，格式为 'private.pkcs1://' + '从官方工具获取到的字符串'
+// const privateKey = Rsa.from('private.pkcs1://MIIEpAIBAAKCAQEApdXuft3as2x...');
 
-//支付宝RSA公钥，格式为 'public.spki://' 或者 'public.pkcs8://' + '从官方工具获取到的字符串'
-const publicKey = Rsa.from('public.spki://MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg...');
+//支付宝RSA公钥，入参是'从官方工具获取到的BASE64字符串'
+const publicKey = Rsa.fromSpki('MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg...');
+// 以上是下列代码的语法糖，格式为 'public.spki://' + '从官方工具获取到的字符串'
+// const publicKey = Rsa.from('public.spki://MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg...');
 
 const whats = new Alipay({ privateKey, publicKey, params: { app_id, } });
 ```
