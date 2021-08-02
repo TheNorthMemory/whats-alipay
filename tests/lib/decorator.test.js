@@ -20,10 +20,10 @@ describe('lib/decorator', () => {
     });
   });
 
-  describe('Decorator.publicCert Getter/Setter', () => {
-    it('property `publicCert` should be static', () => {
-      Decorator.publicCert = 'mock';
-      Decorator.publicCert.should.instanceof(Buffer);
+  describe('Decorator.publicKey Getter/Setter', () => {
+    it('property `publicKey` should be static', () => {
+      Decorator.publicKey = 'mock';
+      Decorator.publicKey.should.instanceof(Buffer);
     });
   });
 
