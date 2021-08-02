@@ -1,21 +1,25 @@
+const {
+  existsSync, unlinkSync, readFileSync, createWriteStream,
+} = require('fs');
+
 const should = require('should');
 
-const Form = require('../../lib/form');
+const Multipart = require('../../lib/multipart');
 
-describe('lib/form', () => {
-  it('should be class `Form`', () => {
-    should(Form).be.a.Function().and.have.property('name', 'Form');
+describe('lib/multipart', () => {
+  it('should be class `Multipart`', () => {
+    should(Multipart).be.a.Function().and.have.property('name', 'Multipart');
   });
 
-  describe('new Form', () => {
-    it('should instanceOf Form and have properties `data` and `indices`', () => {
-      (new Form()).should.be.instanceOf(Form).and.have.properties('data', 'indices');
+  describe('new Multipart', () => {
+    it('should instanceOf Multipart and have properties `data` and `indices`', () => {
+      (new Multipart()).should.be.instanceOf(Multipart).and.have.properties('data', 'indices');
     });
 
     it('The `mimeTypes` property should be there and only allowed append(cannot deleted)', () => {
-      should(Form.mimeTypes).be.Undefined();
+      should(Multipart.mimeTypes).be.Undefined();
 
-      const form = new Form();
+      const form = new Multipart();
 
       form.mimeTypes.should.be.Object()
         .and.have.keys('bmp', 'gif', 'png', 'jpg', 'jpe', 'jpeg', 'mp4', 'mpeg', 'json');
@@ -30,9 +34,9 @@ describe('lib/form', () => {
     });
 
     it('The `dashDash` Buffer property should be there and cannot be deleted/modified', () => {
-      should(Form.dashDash).be.Undefined();
+      should(Multipart.dashDash).be.Undefined();
 
-      const form = new Form();
+      const form = new Multipart();
 
       form.dashDash.should.not.Undefined().and.be.instanceOf(Buffer).and.have.length(2);
 
@@ -46,9 +50,9 @@ describe('lib/form', () => {
     });
 
     it('The `boundary` Buffer property should be there and cannot be deleted/modified', () => {
-      should(Form.boundary).be.Undefined();
+      should(Multipart.boundary).be.Undefined();
 
-      const form = new Form();
+      const form = new Multipart();
 
       form.boundary.should.not.Undefined()
         .and.be.instanceOf(Buffer)
@@ -63,9 +67,9 @@ describe('lib/form', () => {
     });
 
     it('The `CRLF` Buffer property should be there and cannot be deleted/modified', () => {
-      should(Form.CRLF).be.Undefined();
+      should(Multipart.CRLF).be.Undefined();
 
-      const form = new Form();
+      const form = new Multipart();
 
       form.CRLF.should.not.Undefined()
         .and.be.instanceOf(Buffer)
@@ -81,37 +85,37 @@ describe('lib/form', () => {
     });
 
     it('The `data` property should be instanceOf Array and cannot deleted', () => {
-      should(Form.data).be.Undefined();
+      should(Multipart.data).be.Undefined();
 
-      const form = new Form();
+      const form = new Multipart();
 
       form.data.should.be.instanceOf(Array);
       should(delete form.data).be.False();
     });
 
     it('The `indices` property should be instanceOf Object and cannot deleted', () => {
-      should(Form.indices).be.Undefined();
+      should(Multipart.indices).be.Undefined();
 
-      const form = new Form();
+      const form = new Multipart();
 
       form.indices.should.be.instanceOf(Object);
       should(delete form.indices).be.False();
     });
 
-    it('Method `getBuffer()` should returns a Buffer instance and had fixed length(108) default', () => {
-      should(Form.getBuffer).be.Undefined();
-      should(() => Form.getBuffer()).throw(TypeError);
+    it('Method `getBuffer()` should returns a Buffer instance and had fixed length(0) default', () => {
+      should(Multipart.getBuffer).be.Undefined();
+      should(() => Multipart.getBuffer()).throw(TypeError);
 
-      const form = new Form();
+      const form = new Multipart();
 
-      form.getBuffer().should.be.instanceOf(Buffer).and.have.length(108);
+      form.getBuffer().should.be.instanceOf(Buffer).and.have.length(0);
     });
 
     it('Method `getHeaders()` should returns a Object[`Content-type`] with `multipart/form-data; boundary=`', () => {
-      should(Form.getHeaders).be.Undefined();
-      should(() => Form.getHeaders()).throw(TypeError);
+      should(Multipart.getHeaders).be.Undefined();
+      should(() => Multipart.getHeaders()).throw(TypeError);
 
-      const form = new Form();
+      const form = new Multipart();
 
       form.getHeaders().should.be.Object()
         .and.have.keys('Content-Type');
@@ -120,117 +124,316 @@ describe('lib/form', () => {
         .and.match(/^multipart\/form-data; boundary=/);
     });
 
-    it('Method `appendMimeTypes()` should returns the Form instance', () => {
-      should(() => Form.appendMimeTypes()).throw(TypeError);
+    it('Method `appendMimeTypes()` should returns the Multipart instance', () => {
+      should(() => Multipart.appendMimeTypes()).throw(TypeError);
 
-      const form = new Form();
+      const form = new Multipart();
 
-      form.appendMimeTypes().should.be.instanceOf(Form);
+      form.appendMimeTypes().should.be.instanceOf(Multipart);
     });
 
     it('Method `appendMimeTypes({any: \'mock\'})` should returns the Form instance, and affected `form.data` property', () => {
-      should(() => Form.appendMimeTypes({ any: 'mock' })).throw(TypeError);
+      should(() => Multipart.appendMimeTypes({ any: 'mock' })).throw(TypeError);
 
-      const form = new Form();
+      const form = new Multipart();
 
-      form.appendMimeTypes({ any: 'mock' }).should.be.instanceOf(Form);
+      form.appendMimeTypes({ any: 'mock' }).should.be.instanceOf(Multipart);
       form.mimeTypes.should.be.instanceOf(Object)
         .and.have.keys('bmp', 'gif', 'png', 'jpg', 'jpe', 'jpeg', 'mp4', 'mpeg', 'json', 'any')
         .and.have.property('any', 'mock');
     });
 
-    it('Method `append()` should returns the Form instance, and affected `form.data` property', () => {
-      should(() => Form.append()).throw(TypeError);
+    it('Method `append()` should returns the Multipart instance, and affected `form.data` property', () => {
+      should(() => Multipart.append()).throw(TypeError);
 
-      const form = new Form();
+      const form = new Multipart();
       const defaults = form.data.slice();
 
-      form.append().should.be.instanceOf(Form);
+      form.append().should.be.instanceOf(Multipart);
       const previous = form.data.slice();
 
       form.append();
       const current = form.data.slice();
 
       defaults.should.be.Array().and.have.length(0);
-      previous.should.be.Array().and.have.length(8);
-      current.should.be.Array().and.have.length(16);
+      previous.should.be.Array().and.have.length(1 * 10 + 4);
+      current.should.be.Array().and.have.length(2 * 10 + 4);
     });
 
     it('Method `append()` should append name="undefined" disposition onto the `form.data` property', () => {
-      should(() => Form.append()).throw(TypeError);
+      should(() => Multipart.append()).throw(TypeError);
 
-      const form = new Form();
+      const form = new Multipart();
 
-      form.append().should.be.instanceOf(Form);
+      form.append().should.be.instanceOf(Multipart);
       should(Buffer.concat(form.data).toString()).be.String()
-        .and.match(/^Content-Disposition.*/)
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(/Content-Disposition.*/)
         .and.match(/name="undefined"/)
-        .and.match(/.*\r\n$/);
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
 
       should(form.getBuffer().toString()).be.String()
-        .and.match(/^--.*/)
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(/Content-Disposition.*/)
         .and.match(/name="undefined"/)
-        .and.match(/.*--\r\n$/);
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
     });
 
     it('Method `append({}, 1)` should append name="[object Object]" disposition onto the `form.data` property', () => {
-      should(() => Form.append()).throw(TypeError);
+      should(() => Multipart.append()).throw(TypeError);
 
-      const form = new Form();
+      const form = new Multipart();
 
-      form.append({}, 1).should.be.instanceOf(Form);
+      form.append({}, 1).should.be.instanceOf(Multipart);
       should(Buffer.concat(form.data).toString()).be.String()
-        .and.match(/^Content-Disposition.*/)
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(/Content-Disposition.*/)
         .and.match(/name="\[object Object\]"/)
-        .and.match(/.*\r\n$/);
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
 
       should(form.getBuffer().toString()).be.String()
-        .and.match(/^--.*/)
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(/Content-Disposition.*/)
         .and.match(/name="\[object Object\]"/)
-        .and.match(/.*--\r\n$/);
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
     });
 
     it('Method `append(\'meta\', JSON.stringify({}), \'meta.json\')` should append a `Content-Type: application/json` onto the `form.data` property', () => {
-      should(() => Form.append()).throw(TypeError);
+      should(() => Multipart.append()).throw(TypeError);
 
-      const form = new Form();
+      const form = new Multipart();
 
-      form.append('meta', JSON.stringify({}), 'meta.json').should.be.instanceOf(Form);
+      form.append('meta', JSON.stringify({}), 'meta.json').should.be.instanceOf(Multipart);
       should(Buffer.concat(form.data).toString()).be.String()
-        .and.match(/^Content-Disposition.*/)
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(/Content-Disposition.*/)
         .and.match(/name="meta"/)
         .and.match(/Content-Type: application\/json/)
-        .and.match(/.*\r\n$/);
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
 
       should(form.getBuffer().toString()).be.String()
-        .and.match(/^--.*/)
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(/Content-Disposition.*/)
         .and.match(/name="meta"/)
         .and.match(/Content-Type: application\/json/)
-        .and.match(/.*--\r\n$/);
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
     });
 
     it('Method `append(\'image_content\', '
       + 'Buffer.from(\'R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\', \'base64\'), \'demo.gif\')`'
       + ' should append a `Content-Type: image/gif` onto the `form.data` property', () => {
-      const form = new Form();
+      const form = new Multipart();
       const buf = Buffer.from('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', 'base64');
       const filename = 'demo.gif';
 
-      form.append('image_content', buf, filename).should.be.instanceOf(Form);
+      form.append('image_content', buf, filename).should.be.instanceOf(Multipart);
 
       should(Buffer.concat(form.data).toString()).be.String()
-        .and.match(new RegExp(`^Content-Disposition:.*?filename="${filename}`))
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(new RegExp(`Content-Disposition:.*?filename="${filename}`))
         .and.match(/name="image_content"/)
         .and.match(/Content-Type: image\/gif/)
-        .and.match(/.*\r\n$/);
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
 
       should(form.getBuffer().toString()).be.String()
-        .and.match(/^--.*/)
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(new RegExp(`Content-Disposition:.*?filename="${filename}`))
         .and.match(/name="image_content"/)
         .and.match(/Content-Type: image\/gif/)
-        .and.match(/.*--\r\n$/);
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
 
-      should(Buffer.compare(form.data[form.indices.image_content - 1], buf)).be.equal(0);
+      should(Buffer.compare(form.get('image_content'), buf)).be.equal(0);
+    });
+  });
+
+  describe('Multipart::set', () => {
+    it('Method `set()` should append name="undefined" disposition onto the `form.data` property', () => {
+      should(() => Multipart.set()).throw(TypeError);
+
+      const form = new Multipart();
+
+      form.set().should.be.instanceOf(Multipart);
+      should(Buffer.concat(form.data).toString()).be.String()
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(/Content-Disposition.*/)
+        .and.match(/name="undefined"/)
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
+
+      should(form.getBuffer().toString()).be.String()
+        .and.match(/^---{26}[0-9]{24}\r\n/)
+        .and.match(/Content-Disposition.*/)
+        .and.match(/name="undefined"/)
+        .and.match(/---{26}[0-9]{24}--\r\n$/);
+    });
+  });
+
+  describe('Multipart::delete', () => {
+    it('Method `delete(undefined)` should removed the name="undefined" disposition from the `form.data` property', () => {
+      should(() => Multipart.delete()).throw(TypeError);
+
+      const form = new Multipart();
+
+      form.data.should.be.length(0);
+      form.set().should.be.instanceOf(Multipart);
+      form.data.should.be.length(14);
+      form.delete(undefined).should.be.instanceOf(Multipart);
+      form.data.should.be.length(0);
+      form.set().set().data.should.be.length(14);
+      form.delete(undefined).data.should.be.length(0);
+      form.append().append().data.should.be.length(24);
+      form.delete(undefined).data.should.be.length(0);
+    });
+
+    it('Chain `append(a).append(b).append(a).append(d).delete(a)` should re-indexed the value(s) and equal to a new `set(b).set(c)` instance', () => {
+      should(() => Multipart.delete()).throw(TypeError);
+
+      const form = new Multipart();
+
+      form.append('a').append('b').append('a').append('c');
+
+      const previous = form.indices.slice();
+
+      form.data.should.be.length(4 * 10 + 4);
+      form.delete('a').data.should.be.length(2 * 10 + 4);
+
+      form.indices.should.be.Array().and.be.length(2);
+      form.indices[0].should.be.Array().and.be.length(2);
+      form.indices[1].should.be.Array().and.be.length(2);
+      previous.should.be.Array().and.length(4);
+
+      previous[0].should.be.Array().and.length(2);
+      previous[0][0].should.not.be.eql(form.indices[0][0]);
+      previous[0][1].should.be.eql(form.indices[0][1]);
+
+      previous[1].should.be.Array().and.length(2);
+      previous[1][0].should.not.be.eql(form.indices[1][0]);
+      previous[1][1].should.be.eql(form.indices[1][1]);
+
+      form.indices.should.be.eql((new Multipart()).set('b').set('c').indices);
+    });
+  });
+
+  describe('Multipart::get', () => {
+    it('Method `get()` should returns undefined while none named value append/set', () => {
+      should(() => Multipart.get()).throw(TypeError);
+
+      const form = new Multipart();
+      should(form.get()).be.Undefined();
+      should(form.set().get()).be.not.Undefined();
+    });
+
+    it('Method `get()` should returns a Buffer which equal to Buffer.from("undefined")', () => {
+      should(() => Multipart.get()).throw(TypeError);
+
+      const form = new Multipart();
+      form.set().data.should.be.length(14);
+      form.get().should.be.instanceOf(Buffer);
+      form.get().compare(Buffer.from('undefined')).should.be.equal(0);
+    });
+  });
+
+  describe('Multipart::getAll', () => {
+    it('Method `getAll()` should returns an Array which equal [Buffer.from("undefined")[]]', () => {
+      should(() => Multipart.getAll()).throw(TypeError);
+
+      const form = new Multipart();
+      form.getAll().should.be.Array().and.have.length(0);
+      form.set().data.should.be.length(14);
+      form.getAll().should.be.Array().and.have.length(1);
+      form.getAll().should.be.eql([Buffer.from('undefined')]);
+      form.append().data.should.be.length(24);
+      form.getAll().should.be.Array().and.have.length(2);
+      form.getAll().should.be.eql([Buffer.from('undefined'), Buffer.from('undefined')]);
+    });
+  });
+
+  describe('Multipart::has', () => {
+    it('Method `has()` should returns an Boolean False and may True after set/append method(s) was executed', () => {
+      should(() => Multipart.has()).throw(TypeError);
+
+      const form = new Multipart();
+      form.has().should.be.Boolean().and.be.False();
+      form.set().data.should.be.length(14);
+      form.has().should.be.Boolean().and.be.True();
+    });
+  });
+
+  describe('Multipart::entries', () => {
+    it('Method `entries()` should returns an Iterator', () => {
+      should(() => Multipart.entries()).throw(TypeError);
+
+      const form = new Multipart();
+      form.entries().toString().should.be.eql('[object Array Iterator]');
+      form.set().data.should.be.length(14);
+      Array.from(form.entries()).should.be.Array().and.eql([[undefined, Buffer.from('undefined')]]);
+    });
+  });
+
+  describe('Multipart::keys', () => {
+    it('Method `keys()` should returns an Iterator', () => {
+      should(() => Multipart.keys()).throw(TypeError);
+
+      const form = new Multipart();
+      form.keys().toString().should.be.eql('[object Array Iterator]');
+      form.set().data.should.be.length(14);
+      Array.from(form.keys()).should.be.Array().and.eql([undefined]);
+    });
+  });
+
+  describe('Multipart::values', () => {
+    it('Method `values()` should returns an Iterator', () => {
+      should(() => Multipart.values()).throw(TypeError);
+
+      const form = new Multipart();
+      form.values().toString().should.be.eql('[object Array Iterator]');
+      form.set().data.should.be.length(14);
+      Array.from(form.values()).should.be.Array().and.eql([Buffer.from('undefined')]);
+    });
+  });
+
+  describe('Multipart::toString', () => {
+    it('Method `toString()` should returns `[object FormData]` string', () => {
+      Object.prototype.toString.call(Multipart).should.be.String().and.equal('[object FormData]');
+
+      const form = new Multipart();
+      Object.prototype.toString.call(form).should.be.String().and.equal('[object FormData]');
+    });
+
+    it('literal template operation on a Multipart instance should returns `[object FormData]` string', () => {
+      const form = new Multipart();
+      should(`${form}`).be.String().and.eql('[object FormData]');
+    });
+  });
+
+  describe('Multipart::flowing', () => {
+    it('Method `flowing()` should returns a Promise', () => {
+      should(() => Multipart.flowing()).throw(TypeError);
+
+      const form = new Multipart();
+      form.flowing().should.be.Promise();
+      form.flowing().then((i) => i.should.be.instanceOf(Multipart));
+    });
+  });
+
+  describe('Multipart::pipe', () => {
+    it('Method `pipe(WriteStream)` should writen the form.data, and emitted an `finish` event', () => {
+      should(() => Multipart.pipe()).throw(TypeError);
+
+      const file = './multipart.pipe.test.log';
+      if (existsSync(file)) {
+        try { unlinkSync(file); } catch (e) { /* noop */ }
+      }
+
+      const fd = createWriteStream(file);
+      const form = new Multipart();
+
+      fd.on('pipe', (source) => source.should.be.instanceOf(Multipart));
+      fd.on('finish', () => {
+        readFileSync(file).should.eql(form.getBuffer());
+        try { unlinkSync(file); } catch (e) { /* noop */ }
+      });
+
+      form.set().pipe(fd);
     });
   });
 });
