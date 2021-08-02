@@ -3,11 +3,11 @@
 Yet Another Alipay OpenAPI Smart Development Kit
 
 [![GitHub actions](https://github.com/TheNorthMemory/whats-alipay/workflows/ci/badge.svg)](https://github.com/TheNorthMemory/whats-alipay/actions)
-[![GitHub issues](https://badgen.net/github/open-issues/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/issues)
-[![nodejs version](https://badgen.net/npm/node/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/releases)
-[![NPM module version](https://badgen.net/npm/v/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
-[![NPM module downloads per month](https://badgen.net/npm/dm/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
-[![NPM module license](https://badgen.net/npm/license/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
+[![GitHub issues](https://img.shields.io/github/issues/TheNorthMemory/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/issues)
+[![nodejs version](https://img.shields.io/node/v/whats-alipay)](https://github.com/TheNorthMemory/whats-alipay/releases)
+[![NPM module version](https://img.shields.io/npm/v/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
+[![NPM module downloads per month](https://img.shields.io/npm/dm/whats-alipay)](https://www.npmjs.com/package/whats-alipay)
+[![NPM module license](https://img.shields.io/npm/l/whats-alipay?color=blue)](https://www.npmjs.com/package/whats-alipay)
 
 ## 主要功能
 
@@ -111,19 +111,18 @@ Examples:
 ### 初始化
 
 ```javascript
-const {readFileSync} = require('fs')
-const {Alipay,Rsa} = require('whats-alipay')
+const { Alipay, Rsa } = require('whats-alipay');
 
 //应用app_id
-const app_id = '2014072300007148'
+const app_id = '2014072300007148';
 
 //商户RSA私钥，格式为 'private.pkcs1://' 或者 'private.pkcs8://' + '从官方工具获取到的字符串'
 const privateKey = Rsa.from('private.pkcs1://MIIEpAIBAAKCAQEApdXuft3as2x...');
 
 //支付宝RSA公钥，格式为 'public.spki://' 或者 'public.pkcs8://' + '从官方工具获取到的字符串'
-const publicCert = Rsa.from('public.spki://MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg...');
+const publicKey = Rsa.from('public.spki://MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg...');
 
-const whats = new Alipay({ privateKey, publicCert, params: { app_id, } })
+const whats = new Alipay({ privateKey, publicKey, params: { app_id, } });
 ```
 
 #### 统一收单线下交易查询
@@ -1290,6 +1289,13 @@ Verifying the `message` with given `signature` string that uses given `type=RSA|
 To disable `nock` and request with the real gateway, just `NOCK_OFF=true npm test`
 
 ## Changelog
+
+- v0.1.3 2021-08-02
+  - 新增 `Rsa.from` 静态方法加载`私钥`/`公钥`，语法糖对应为 `private.pkcs[1|8]://` + '字符串' 或者 `public.[spki|pkcs1]://` + '字符串'；
+  - 标记 `config.publicCert` 为不推荐初始化入参，使用 `config.publicKey` 替代;
+
+- v0.1.2 2021-01-06
+  - 依赖 `Axios` 升级至 `>=0.21.1`，相关 `CVE-2020-28168`；
 
 - v0.1.1
   - 输出 `Helpers` 为本模块基础类之一；
