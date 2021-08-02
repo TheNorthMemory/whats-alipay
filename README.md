@@ -112,22 +112,19 @@ Examples:
 
 ```javascript
 const {readFileSync} = require('fs')
-const {Alipay} = require('whats-alipay')
+const {Alipay,Rsa} = require('whats-alipay')
 
 //应用app_id
 const app_id = '2014072300007148'
 
-//商户私钥证书，须完整格式，同时支持 `PKCS#1` `PKCS#8` 格式
-const privateKey = readFileSync('/your/openapi/private_key.pem')
+//商户RSA私钥，格式为 'private.pkcs1://' 或者 'private.pkcs8://' + '从官方工具获取到的字符串'
+const privateKey = Rsa.from('private.pkcs1://MIIEpAIBAAKCAQEApdXuft3as2x...');
 
-//支付宝公钥证书，须完整格式，同时支持 `PKCS#1` `PKCS#8` 格式
-const publicCert = readFileSync('/the/alipay/public_cert.pem')
+//支付宝RSA公钥，格式为 'public.spki://' 或者 'public.pkcs8://' + '从官方工具获取到的字符串'
+const publicCert = Rsa.from('public.spki://MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg...');
 
 const whats = new Alipay({ privateKey, publicCert, params: { app_id, } })
 ```
-
-> *证书完整格式* 是指：
-> 包含 `-----BEGIN` 及 `-----END`，内容是列宽64的`base64-encoded`字符串，可直接用 `openssl` 命令行工具进行验证格式。
 
 #### 统一收单线下交易查询
 
