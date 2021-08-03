@@ -121,11 +121,15 @@ const app_id = '2014072300007148';
 const privateKey = Rsa.fromPkcs1('MIIEpAIBAAKCAQEApdXuft3as2x...');
 // 以上是下列代码的语法糖，格式为 'private.pkcs1://' + '从官方工具获取到的字符串'
 // const privateKey = Rsa.from('private.pkcs1://MIIEpAIBAAKCAQEApdXuft3as2x...');
+// Node10仅支持以下方式，须保证`private_key.pem`为完整X509格式
+// const privateKey = require('fs').readFileSync('/your/openapi/private_key.pem');
 
 //支付宝RSA公钥，入参是'从官方工具获取到的BASE64字符串'
 const publicKey = Rsa.fromSpki('MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg...');
 // 以上是下列代码的语法糖，格式为 'public.spki://' + '从官方工具获取到的字符串'
 // const publicKey = Rsa.from('public.spki://MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg...');
+// Node10仅支持以下方式，须保证`public_key.pem`为完整X509格式
+// const publicKey = require('fs').readFileSync('/the/alipay/public_key.pem');
 
 const whats = new Alipay({ privateKey, publicKey, params: { app_id, } });
 ```
