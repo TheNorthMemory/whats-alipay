@@ -1,5 +1,10 @@
 # 变更历史
 
+## v0.1.4 2021-08-03
+
+- 新增 `Rsa.fromPkcs1`, `Rsa.fromPkcs8`, `Rsa.fromSpki` 静态方法加载`私钥`/`公钥`语法糖；
+- 调整 `Form` 类为 `Multipart` 类，完整实现[MDN FormData](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData)，同步支持流动模式上传文件;
+
 ## v0.1.3 2021-08-02
 
 - 新增 `Rsa.from` 静态方法加载`私钥`/`公钥`，语法糖对应为 `private.pkcs[1|8]://` + '字符串' 或者 `public.[spki|pkcs1]://` + '字符串'；

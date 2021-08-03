@@ -161,7 +161,7 @@ whats
     ],
     via: 'spanner-internet-5396.sa127[200]',
     'x-alipay-responder': 'alipay.trade.query',
-    'x-alipay-signature': 'gALtsKSWEWRG4wSx8f1aPcLXYrro3ZLGplxNWerZkIAGR4qNz3fP4JCjdRx2M4uFfLfL1uIQ/L1Rt/oZD+NVKn46rLj7YLXWz2jTEnPPofgXywhwHIZ/MfrRc1DjL0xAh00OI6Gur2lileXmn7zaOG0RQoc0mXkSO5AwLWbiO0EnSoh3897TgQFp1hRDpTpXjnxvKSSFiUgr4EDCklfJbc6B3I1i3BvHtzB+lXtHPABukAvzJD/QtjjglIyOeZZ03699cCEl2JmJYGdA1Du+bBjsycLogCNXBLCmdOi5ntRVEo/Tlvl0QYTRleC7dGuCCn1ousZXLy09VUzJ1m85Fw==',
+    'x-alipay-signature': 'gALtsKSWEWRG4wSx8==',
     'x-alipay-verified': 'ok'
   },
   data: {
@@ -271,15 +271,19 @@ whats
 #### 支付API > 图片上传
 
 ```javascript
-const {Form} = require('whats-alipay')
-const payload = new Form()
-payload.append('image_content', require('fs').readFileSync('/path/for/uploading.jpg'), 'uploading.jpg')
+const { Multipart } = require('whats-alipay');
+const form = new Multipart();
+form.append(
+  'image_content',
+  require('fs').readFileSync('/path/for/uploading.jpg'),
+  'uploading.jpg'
+);
 
 whats
   .ant.merchant.expand.indirect.image.upload(
-    payload.getBuffer(),
+    form.getBuffer(),
     {image_type: 'jpg'},
-    {...payload.getHeaders()}
+    {...form.getHeaders()}
   )
   .then(({data}) => data)
   .catch(({response: {data}}) => data)
@@ -289,15 +293,19 @@ whats
 #### 店铺API > 上传门店照片和视频接口
 
 ```javascript
-const {Form} = require('whats-alipay')
-const payload = new Form()
-payload.append('image_content', require('fs').readFileSync('/path/for/uploading.jpg'), 'uploading.jpg')
+const { Multipart } = require('whats-alipay');
+const form = new Multipart();
+form.append(
+  'image_content',
+  require('fs').readFileSync('/path/for/uploading.jpg'),
+  'uploading.jpg'
+);
 
 whats
   .alipay.offline.material.image.upload(
-    payload.getBuffer(),
+    form.getBuffer(),
     {image_type: 'jpg', image_name: 'uploading.jpg'},
-    {...payload.getHeaders()}
+    {...form.getHeaders()}
   )
   .then(({data}) => data)
   .catch(({response: {data}}) => data)
