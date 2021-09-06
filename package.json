@@ -1,6 +1,6 @@
 {
   "name": "whats-alipay",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Yet Another Alipay OpenAPI SDK",
   "main": "index.js",
   "scripts": {
@@ -46,11 +46,11 @@
   },
   "homepage": "https://github.com/TheNorthMemory/whats-alipay#readme",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.2"
   },
   "peerDependencies": {
     "@fidm/x509": "^1.2.1",
-    "yargs": "^16.2.0"
+    "yargs": "^17.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

@@ -1,5 +1,9 @@
 # 变更历史
 
+## v0.1.5 2021-09-06
+
+- 安全更新，升级依赖的Axios>=0.21.1，相关见[这里](https://github.com/axios/axios/issues/3979);
+
 ## v0.1.4 2021-08-03
 
 - 新增 `Rsa.fromPkcs1`, `Rsa.fromPkcs8`, `Rsa.fromSpki` 静态方法加载`私钥`/`公钥`语法糖；
