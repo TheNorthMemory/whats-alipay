@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [10.15.x, 12.x, 14.x, 16.x]
+        node-version: [10.15.x, 12.x, 14.x, 16.x, 18.x, 20.x, 21.x]
         os: [ubuntu-latest, macOS-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 
@@ -19,9 +19,11 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.symlinks true
         if: runner.os == 'Windows'
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
       - name: ${{ matrix.os }}-node-v${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
